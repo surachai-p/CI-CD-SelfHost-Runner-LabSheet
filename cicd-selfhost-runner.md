@@ -965,6 +965,7 @@ tail -f ~/actions-runner/_diag/Runner_*.log
   บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
   ```
 
+<img width="1919" height="967" alt="image" src="https://github.com/user-attachments/assets/7ca896a0-0864-45f7-888d-d829d1f40604" />
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
 
@@ -1147,6 +1148,8 @@ watch -n 10 ./monitor.sh
 บันทึกรูปผลการรันคำสั่ง
 ```
 
+<img width="838" height="345" alt="Screenshot 2025-12-23 112101" src="https://github.com/user-attachments/assets/8f93dcdf-6853-49ba-ade1-16c1f2a34a6e" />
+
 ## สรุปจุดสำคัญ
 
 ### ✅ ข้อสำคัญสำหรับ Production
@@ -1189,8 +1192,11 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+1. ไม่ต้องเปิด Port ขาเข้า (No Inbound Port): ไม่ต้องตั้งค่า Firewall เพื่อเปิด Port อันตรายให้คนภายนอกเข้ามา
 
+2. จัดการ Network ง่าย: สามารถทำงานได้แม้เครื่องจะอยู่หลัง NAT หรือใน Private Network โดยไม่ต้องทำ Public IP หรือ Port Forwarding
+
+3. ความเสถียร: ควบคุมการเชื่อมต่อได้จากฝั่ง Runner เอง หาก Network หลุด Runner จะพยายามต่อใหม่เองโดยอัตโนมัติ
 
 </details>
 
@@ -1199,8 +1205,13 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+1. Firewall Configuration:
 
+- Push-based: ต้องเปิด Port ขาเข้า (Inbound) เพื่อให้ Server ภายนอกสั่งงานเข้ามาได้ ซึ่งเสี่ยงต่อการถูก Port Scanning หรือ Brute Force Attack
+
+- Pull-based: อนุญาตเฉพาะ Traffic ขาออก (Outbound) ไปยัง GitHub เท่านั้น (มักใช้ Port 443 ปกติ) ทำให้ Hacker ไม่สามารถเริ่มการเชื่อมต่อเข้ามายังเครื่อง Server ได้โดยตรง
+
+2. Identity Verification: เนื่องจาก Runner เป็นฝ่ายติดต่อไปหา GitHub โดยใช้ Token ที่ระบุตัวตนชัดเจน จึงมั่นใจได้ว่าคุยกับ Server ที่ถูกต้อง ไม่ใช่การรอรับคำสั่งจากใครก็ได้ที่ยิง IP เข้ามา
 
 </details>
 
@@ -1209,8 +1220,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
-
+npm ci (Clean Install) เป็น Best Practice สำหรับ CI/CD Pipeline และ Production เพราะเน้น ความแน่นอน (Determinism) และ ความเร็ว
 
 </details>
 
@@ -1219,8 +1229,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
-
+มีความเสี่ยงใน Public Repository ใครก็ตามในโลกสามารถ Fork code ของเราไปแก้ แล้วส่ง Pull Request (PR) กลับมาได้ หากเราตั้งค่าให้ Workflow รันอัตโนมัติเมื่อมี PR
 
 </details>
 
@@ -1229,8 +1238,9 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+Nginx (Engine-X) คือ Web Server ประสิทธิภาพสูง ที่นิยมนำมาใช้เป็น Load Balancer และ Reverse Proxy
 
+Reverse Proxy คือการให้ Nginx รับหน้าเสื่อรับ Request จาก User ก่อน แล้วค่อยส่งต่อ (Proxy) ไปให้ Application Server (เช่น Node.js, Python, Java) ด้านหลังทำงาน
 
 </details>
 ---
@@ -1241,3 +1251,9 @@ watch -n 10 ./monitor.sh
 - [npm ci Documentation](https://docs.npmjs.com/cli/v10/commands/npm-ci)
 - [Docker Multi-stage Builds](https://docs.docker.com/build/building/multi-stage/)
 - [Nginx Reverse Proxy Guide](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
+
+---
+
+Repository private
+https://github.com/Job-67/nodejs-cicd-selfhosted
+
