@@ -1057,7 +1057,7 @@ docker logs nodejs-selfhosted-app
 ```
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
-<img width="1919" height="1033" alt="image" src="https://github.com/user-attachments/assets/2e2563f5-1eec-4b73-a74e-ddfa2adf2380" />
+<img width="1919" height="1077" alt="image" src="https://github.com/user-attachments/assets/63eb2b2e-ffcc-482b-9552-2c4250380d68" />
 
 
 ### ส่วนที่ 8: Monitoring และ Troubleshooting 
@@ -1141,7 +1141,7 @@ chmod +x monitor.sh
 watch -n 10 ./monitor.sh
 ```
 ### บันทึกผลการรัน monitor.sh
-<img width="906" height="656" alt="image" src="https://github.com/user-attachments/assets/98438e8a-4a7d-48be-b408-51acd50d90b2" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/fe797b25-1680-4454-8836-3186b496c9c2" />
 
 
 ## สรุปจุดสำคัญ
