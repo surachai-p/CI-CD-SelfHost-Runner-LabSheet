@@ -960,9 +960,9 @@ tail -f ~/actions-runner/_diag/Runner_*.log
 2. ควรเห็น runner แสดงสถานะ **Idle** สีเขียว
 
   ### บันทึกรูปผลการทดลอง
-  ```
-  บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
-  ```
+
+<img width="1440" height="573" alt="ภาพถ่ายหน้าจอ 2568-12-23 เวลา 09 58 34" src="https://github.com/user-attachments/assets/bec5b748-9d78-493e-b322-05ac1366ba12" />
+
 
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
@@ -1057,9 +1057,8 @@ docker logs nodejs-selfhosted-app
 ```
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+<img width="792" height="121" alt="ภาพถ่ายหน้าจอ 2568-12-23 เวลา 10 31 39" src="https://github.com/user-attachments/assets/61ccc626-44d1-42e4-8973-dc24dc8356d5" />
+
 
 ### ส่วนที่ 8: Monitoring และ Troubleshooting 
 
@@ -1142,9 +1141,9 @@ chmod +x monitor.sh
 watch -n 10 ./monitor.sh
 ```
 ### บันทึกผลการรัน monitor.sh
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+
+<img width="475" height="360" alt="ภาพถ่ายหน้าจอ 2568-12-23 เวลา 10 38 23" src="https://github.com/user-attachments/assets/3d11ecef-ea8d-439e-87c6-23764a512bf2" />
+
 
 ## สรุปจุดสำคัญ
 
@@ -1188,18 +1187,20 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
-
-
+ คือ Runner ที่เชื่อมไปหา github เพื่อดึง job จาก git action มารันบนเครื่องของเรา
+ ข้อดี
+  - ไม่ต้อง inbound port ให้ GitHub เข้ามา
+  - ไม่ต้องมี Static IP Address
+  - สามารถทำงานได้หลัง Firewall / NAT
+  - เหมาะกับการ Deploy ไปยัง on-premise / local server
+  - มีความปลอดภัยมากกว่า Push-based Architecture
 </details>
 
 ### 2. ทำไม Pull-based ปลอดภัยกว่า Push-based
 
 <details>
 <summary>คำตอบ</summary>
-
- เขียนคำตอบลงในช่องนี้
-
+ เพราะ Pull-based เชื่อมไปหา github เพื่อดึง job จาก git action เเต่ Push-based ต้องเปิด inbound port รอรับ job จาก github ที่ส่งเข้ามาที่เครื่อง runner โดยตรง ทำให้ Pull-based ลดความเสี่ยงจากการโจมตีจากภายนอก เช่น port scanning ไม่มีการเปิดให้บุคคลภายนอกเชื่อมต่อเข้ามาที่ server โดยตรง
 
 </details>
 
@@ -1207,29 +1208,26 @@ watch -n 10 ./monitor.sh
 
 <details>
 <summary>คำตอบ</summary>
-
- เขียนคำตอบลงในช่องนี้
-
-
+ - npm ci ใช้ไฟล์ package-lock.json ทำให้ติดตั้ง dependency ได้ตรงกันทุกครั้ง ช่วยลดความผิดพลาดในการ deploy
+ - ติดตั้งได้ เร็วกว่า เพราะไม่คำนวณ dependency ใหม่
+ - ป้องกันปัญหาเวอร์ชัน dependency เปลี่ยนโดยไม่ตั้งใจ
 </details>
 
 ### 4. ทำไมห้ามใช้ Self-Hosted Runner กับ Public Repository
 
 <details>
 <summary>คำตอบ</summary>
-
- เขียนคำตอบลงในช่องนี้
-
-
+- ถ้าใช้บน Public Repository ใครก็สามารถ fork และแก้ไขไฟล์ workflow เปลี่โค้ดในไฟล์เป็นอะไรก็ได้เเล้วมารันบนเครื่องของเราได้
 </details>
 
 
 ### 5. nginx คืออะไร และการทำ Revers Proxy ใน nginx มีความสำคัญอย่างไร
 <details>
 <summary>คำตอบ</summary>
-
- เขียนคำตอบลงในช่องนี้
-
+nginx คือ Web Server และ Reverse Proxy ที่มีประสิทธิภาพสูง ใช้ทรัพยากรน้อยนิยมใช้ในระบบ Production เพื่อทำหน้าที่เป็น Gateway ของแอปพลิเคชัน สามารถใช้ ให้บริการเว็บ (HTTP/HTTPS) ทำ Reverse Proxy ทำ Load Balancingเเละจัดการ SSL/TLS เพื่อเพิ่มความปลอดภัยและประสิทธิภาพของระบบ
+ความสำคัญ
+ - เพิ่มความปลอดภัยของระบบ (Security) โดยการให้ผู้ใช้ติดต่อ Nginx เพียงจุดเดียวโดยรับ request จากผู้ใช้เพียงจุดเดียว แล้วส่งต่อไปยัง backend application ที่รันอยู่ภายใน
+ - ใช้ แยกหน้าที่ของระบบ Nginx ใช้จัดการ network / HTTP Backend ใช้ประมวลผล business logic
 
 </details>
 ---
