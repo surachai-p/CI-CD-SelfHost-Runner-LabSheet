@@ -960,8 +960,9 @@ tail -f ~/actions-runner/_diag/Runner_*.log
 2. ควรเห็น runner แสดงสถานะ **Idle** สีเขียว
 
   ### บันทึกรูปผลการทดลอง
-  ```
-  บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
+  ``
+  <img width="1919" height="949" alt="image" src="https://github.com/user-attachments/assets/00e50e68-6694-4663-95fd-695ed0672c73" />
+
   ```
 
 
