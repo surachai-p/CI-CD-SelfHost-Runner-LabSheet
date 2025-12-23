@@ -1,4 +1,4 @@
-<img width="1919" height="966" alt="image" src="https://github.com/user-attachments/assets/f172540a-f609-44d0-bfe7-e5f27b0fe4e5" /><img width="1919" height="966" alt="image" src="https://github.com/user-attachments/assets/16df6244-323f-4060-812f-d7c2e2872753" /> # ใบงาน: การ Deploy แอปพลิเคชันด้วย GitHub Actions และ Self-Hosted Runner
+# ใบงาน: การ Deploy แอปพลิเคชันด้วย GitHub Actions และ Self-Hosted Runner
 ## วัตถุประสงค์
 
 1. อธิบายหลักการทำงานของ Self-Hosted Runner แบบ Pull-based Model ได้
