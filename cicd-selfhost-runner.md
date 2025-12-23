@@ -961,9 +961,7 @@ tail -f ~/actions-runner/_diag/Runner_*.log
 2. ควรเห็น runner แสดงสถานะ **Idle** สีเขียว
 
   ### บันทึกรูปผลการทดลอง
-  ```
-  <img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/2151fd0b-820c-41cc-b5e4-3437824435d9" />
-  ```
+  ![alt text](image.png)
 
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
@@ -1058,9 +1056,7 @@ docker logs nodejs-selfhosted-app
 ```
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+![alt text](image-1.png)
 
 ### ส่วนที่ 8: Monitoring และ Troubleshooting 
 
@@ -1143,9 +1139,7 @@ chmod +x monitor.sh
 watch -n 10 ./monitor.sh
 ```
 ### บันทึกผลการรัน monitor.sh
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+![alt text](image-3.png)
 
 ## สรุปจุดสำคัญ
 
@@ -1185,55 +1179,40 @@ watch -n 10 ./monitor.sh
 ## คำถามท้ายบท
 
 ### 1. Pull-based Model ของ Self-Hosted Runner คืออะไร มีข้อดีอย่างไร
+<details> <summary>คำตอบ</summary>
 
-<details>
-<summary>คำตอบ</summary>
-
- เขียนคำตอบลงในช่องนี้
-
+  - คือรูปแบบที่ตัว Runner จะเป็นฝ่ายติดต่อ (Poll) ไปยัง GitHub Server เพื่อขอรับงานเอง แทนที่จะรอรับคำสั่ง 
+  - ข้อดี: ติดตั้งง่ายและปลอดภัยกว่า เพราะ ไม่ต้องเปิด Firewall Port ขาเข้า (Inbound) หรือทำ Public IP ให้ตัวเครื่อง Runner ทำให้ใช้งานในเครือข่ายปิด (Private Network) ได้สะดวก
 
 </details>
 
 ### 2. ทำไม Pull-based ปลอดภัยกว่า Push-based
+<details> <summary>คำตอบ</summary>
 
-<details>
-<summary>คำตอบ</summary>
-
- เขียนคำตอบลงในช่องนี้
-
+  - เพราะ Pull-based ไม่ต้องเปิด Port สาธารณะทิ้งไว้เพื่อรอการเชื่อมต่อ ทำให้ ลดช่องทางโจมตี (Attack Surface) ผู้ไม่หวังดีไม่สามารถสแกนเจอหรือยิงคำสั่งเข้ามาโจมตีเครือข่ายภายในผ่านตัว Runner ได้โดยตรง
 
 </details>
 
 ### 3. ทำไมต้องใช้ npm ci แทน npm install ใน production
+<details> <summary>คำตอบ</summary>
 
-<details>
-<summary>คำตอบ</summary>
-
- เขียนคำตอบลงในช่องนี้
-
+  - เพื่อให้ได้ Environment ที่เหมือนกันทุกครั้ง (Deterministic) เพราะ npm ci จะติดตั้ง Package ตามไฟล์ package-lock.json อย่างเคร่งครัด ไม่มีการอัปเดตเวอร์ชันเอง และจะลบโฟลเดอร์ node_modules เก่าทิ้งก่อนเสมอ เพื่อรับประกันความสะอาดของระบบ (Clean Install)
 
 </details>
 
 ### 4. ทำไมห้ามใช้ Self-Hosted Runner กับ Public Repository
+<details> <summary>คำตอบ</summary>
 
-<details>
-<summary>คำตอบ</summary>
-
- เขียนคำตอบลงในช่องนี้
-
+  - เสี่ยงต่อการถูกโจมตีแบบ Remote Code Execution เพราะใครก็ได้สามารถส่ง Pull Request ที่ฝังโค้ดอันตรายมาสั่งให้ Runner ของเราทำงานได้ ซึ่งอาจนำไปสู่การถูกขโมยข้อมูลความลับ (Secrets) หรือถูกยึดเครื่องเซิร์ฟเวอร์ที่รันอยู่นั้นถาวร
 
 </details>
-
 
 ### 5. Nginx คืออะไร และการทำ Revers Proxy ใน Nginx มีความสำคัญอย่างไร
-<details>
-<summary>คำตอบ</summary>
+<details> <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
-
+  - Nginx คือ Web Server ประสิทธิภาพสูงที่นิยมใช้จัดการ Connection จำนวนมาก ความสำคัญของ Reverse Proxy: คือการเป็นตัวกลางรับ Request แทนแอปพลิเคชันจริง ช่วยเรื่อง ความปลอดภัย (ซ่อน IP และโครงสร้างภายใน), จัดการ SSL/HTTPS ที่จุดเดียว, และช่วย Load Balance กระจายภาระงานไปยังเซิร์ฟเวอร์หลายตัว
 
 </details>
----
 
 ## เอกสารอ้างอิง
 
