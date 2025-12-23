@@ -960,9 +960,10 @@ tail -f ~/actions-runner/_diag/Runner_*.log
 2. ควรเห็น runner แสดงสถานะ **Idle** สีเขียว
 
   ### บันทึกรูปผลการทดลอง
-  ```
+  
   บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
-  ```
+  ![alt text](image.png)
+  
 
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
