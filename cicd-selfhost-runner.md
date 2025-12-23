@@ -963,6 +963,7 @@ tail -f ~/actions-runner/_diag/Runner_*.log
   ```
   บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
   ```
+<img width="1710" height="1112" alt="ภาพถ่ายหน้าจอ 2568-12-23 เวลา 10 41 00" src="https://github.com/user-attachments/assets/b51abffe-2acc-4d2f-8f2f-49dd2dc3e1dc" />
 
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
@@ -1060,6 +1061,8 @@ docker logs nodejs-selfhosted-app
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
+<img width="1047" height="306" alt="ภาพถ่ายหน้าจอ 2568-12-23 เวลา 10 47 29" src="https://github.com/user-attachments/assets/07332062-64c5-4754-8ab9-dedba5aea329" />
+
 
 ### ส่วนที่ 8: Monitoring และ Troubleshooting 
 
@@ -1145,6 +1148,8 @@ watch -n 10 ./monitor.sh
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
+<img width="2116" height="944" alt="image" src="https://github.com/user-attachments/assets/195b65f1-7f03-4a57-97bd-f2dbaf0c8e43" />
+
 
 ## สรุปจุดสำคัญ
 
