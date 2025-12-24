@@ -963,6 +963,8 @@ tail -f ~/actions-runner/_diag/Runner_*.log
   ### บันทึกรูปผลการทดลอง
   ```
   บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
+<img width="1254" height="877" alt="Screenshot 2568-12-23 at 14 35 43" src="https://github.com/user-attachments/assets/038683e8-9961-4375-b313-1a1e5d6ccd07" />
+
   ```
 
 
@@ -1060,6 +1062,8 @@ docker logs nodejs-selfhosted-app
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
 ```txt
 บันทึกรูปผลการรันคำสั่ง
+<img width="1401" height="818" alt="Screenshot 2568-12-24 at 08 42 27" src="https://github.com/user-attachments/assets/a675c768-fae8-4d48-b88f-6d8b3edf6c9f" />
+
 ```
 
 ### ส่วนที่ 8: Monitoring และ Troubleshooting 
@@ -1145,6 +1149,8 @@ watch -n 10 ./monitor.sh
 ### บันทึกผลการรัน monitor.sh
 ```txt
 บันทึกรูปผลการรันคำสั่ง
+<img width="1012" height="806" alt="image" src="https://github.com/user-attachments/assets/e1a6e306-066a-4c70-888b-f172ad42494f" />
+
 ```
 
 ## สรุปจุดสำคัญ
@@ -1188,28 +1194,31 @@ watch -n 10 ./monitor.sh
 
 <details>
 <summary>คำตอบ</summary>
+คำตอบ: Pull-based Model คือสถาปัตยกรรมที่ตัว Runner (เครื่อง Mac ของคุณ) จะเป็นฝ่ายติดต่อไปยัง GitHub เพื่อ "ดึง" (Pull) งานมาทำเอง โดยใช้วิธีการ Long Polling ผ่านพอร์ต HTTPS (443)
 
- เขียนคำตอบลงในช่องนี้
-
-
+ข้อดี: ไม่ต้องตั้งค่า Forward Port ใน Router หรือ Firewall ของเครือข่าย ทำให้เครื่องที่อยู่หลัง NAT หรือ VPN สามารถทำงานเป็น CI/CD Runner ได้ทันทีเพียงแค่มีอินเทอร์เน็ต
 </details>
 
 ### 2. ทำไม Pull-based ปลอดภัยกว่า Push-based
 
 <details>
 <summary>คำตอบ</summary>
+คำตอบ: ความปลอดภัยที่เพิ่มขึ้นมาจาก "ทิศทางของการเชื่อมต่อ" ครับ
 
- เขียนคำตอบลงในช่องนี้
+ไม่ต้องเปิดพอร์ตขาเข้า (No Inbound Ports): ในระบบ Push-based เซิร์ฟเวอร์ต้องเปิดพอร์ตทิ้งไว้เพื่อให้ GitHub ส่งข้อมูลเข้ามา ซึ่งเสี่ยงต่อการถูก Scan พอร์ตหรือโจมตี
 
-
+การควบคุมอยู่ที่เรา: Pull-based ไม่มีการเปิดรับการเชื่อมต่อจากภายนอกเลย (Zero Inbound) ระบบภายนอกจึงไม่สามารถเจาะเข้ามาที่เครื่อง Runner ได้โดยตรง
 </details>
 
 ### 3. ทำไมต้องใช้ npm ci แทน npm install ใน production
 
 <details>
 <summary>คำตอบ</summary>
+คำตอบ: เพื่อให้เกิดความแม่นยำและเสถียรภาพสูงสุดในการ Deploy งาน (Deterministic Build):
 
- เขียนคำตอบลงในช่องนี้
+ความแม่นยำ: npm ci จะอ่านข้อมูลจากไฟล์ package-lock.json เท่านั้น เพื่อให้มั่นใจว่า Version ของ Library ทุกตัวจะตรงกับที่ Developer ใช้เป๊ะๆ
+
+ความปลอดภัย: หาก package-lock.json ไม่ตรงกับ package.json ตัว npm ci จะหยุดการทำงานทันที (Fail fast) เพื่อป้องกันปัญหา Library เพี้ยนใน Production
 
 
 </details>
@@ -1219,7 +1228,11 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+คำตอบ: เพราะมีความเสี่ยงด้าน Security Breach (การบุกรุกระบบ) สูงมาก:
+
+ใครก็รันโค้ดได้: ใน Public Repo หากใครบางคนส่ง Pull Request ที่มีสคริปต์อันตรายมา โค้ดนั้นอาจถูกรันบนเครื่อง Runner (เครื่อง Mac ของคุณ) โดยตรง
+
+การเข้าถึงข้อมูลในเครื่อง: ผู้โจมตีสามารถเขียนสคริปต์เพื่อขโมย Environment Variables, SSH Keys หรือไฟล์สำคัญในเครื่องของคุณผ่าน Workflow ได้ทันที
 
 
 </details>
@@ -1228,8 +1241,11 @@ watch -n 10 ./monitor.sh
 ### 5. Nginx คืออะไร และการทำ Revers Proxy ใน Nginx มีความสำคัญอย่างไร
 <details>
 <summary>คำตอบ</summary>
+คำตอบ: Nginx คือซอฟต์แวร์ Web Server ประสิทธิภาพสูงที่นิยมนำมาทำหน้าที่เป็น Reverse Proxy
 
- เขียนคำตอบลงในช่องนี้
+ความสำคัญ: ทำหน้าที่เป็น "ด่านหน้า" คอยรับ Request จากพอร์ตมาตรฐาน (เช่น 80 หรือ 8080) แล้วส่งต่อไปยังแอป Node.js ที่รันอยู่ภายใน (พอร์ต 3000)
+
+ประโยชน์: ช่วยจัดการเรื่องการทำ SSL/TLS (HTTPS), การทำ Load Balancing, และช่วยซ่อนเลขพอร์ตจริงของแอปไว้เพื่อความปลอดภัย
 
 
 </details>
