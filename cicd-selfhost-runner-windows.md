@@ -1111,6 +1111,7 @@ Get-Content -Path "_diag\Runner_*.log" -Wait -Tail 50
 บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
 และแสดง Runner status เป็น "Idle" สีเขียว
 ```
+<img width="1919" height="1036" alt="image" src="https://github.com/user-attachments/assets/c182e5f6-b6de-47ad-98fc-3723a3fde8ca" />
 
 ---
 
@@ -1201,7 +1202,7 @@ docker logs nodejs-selfhosted-app
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
-
+- ผม Deploy ไม่ได้เลยครับ แก้หลายรอบมากเลยครับ Deploy ก็เกิดการ Failed ทุกรอบเลยครับ
 ---
 
 ### ส่วนที่ 8: Monitoring และ Troubleshooting
