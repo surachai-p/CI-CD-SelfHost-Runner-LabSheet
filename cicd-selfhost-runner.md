@@ -1139,7 +1139,7 @@ chmod +x monitor.sh
 watch -n 10 ./monitor.sh
 ```
 ### บันทึกผลการรัน monitor.sh
-![alt text](image-3.png)
+![alt text](image-2.png)
 
 ## สรุปจุดสำคัญ
 
