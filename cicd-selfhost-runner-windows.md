@@ -1074,6 +1074,7 @@ Current runner version: '2.330.0'
 ### บันทึกรูปผลการทดลอง
 
 <img width="1919" height="1079" alt="Screenshot 2025-12-23 222043" src="https://github.com/user-attachments/assets/4a44527d-bda4-4f1d-901d-98c7dfab24be" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/3118af80-a4bd-432c-a5c4-7828ad391549" />
 
 
 ---
