@@ -962,6 +962,7 @@ tail -f ~/actions-runner/_diag/Runner_*.log
 
   ### บันทึกรูปผลการทดลอง
   <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/e36a2b23-748c-4cca-8f33-0f4a7bbf689c" />
+  <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/cf431e74-5d71-40a0-8567-f112ecc7443d" />
 
 
 
