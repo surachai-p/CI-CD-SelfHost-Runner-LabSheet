@@ -1147,7 +1147,8 @@ chmod +x monitor.sh
 watch -n 10 ./monitor.sh
 ```
 ### บันทึกผลการรัน monitor.sh
-```txt
+<img width="588" height="507" alt="image" src="https://github.com/user-attachments/assets/e8af117a-1f40-4bd4-9519-6862fb9ed679" />
+
 บันทึกรูปผลการรันคำสั่ง
 ```
 
