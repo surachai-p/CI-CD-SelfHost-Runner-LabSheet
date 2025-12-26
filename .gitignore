@@ -1,0 +1,39 @@
+# =====================
+# Node.js
+# =====================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =====================
+# Environment
+# =====================
+.env
+.env.*
+
+# =====================
+# OS / Editor
+# =====================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# =====================
+# Docker
+# =====================
+.dockerignore
+*.log
+
+# =====================
+# CI / Build output
+# =====================
+dist/
+build/
+coverage/
+
+# =====================
+# GitHub Actions Runner (สำคัญมาก)
+# =====================
+.github/workflows/actions-runner/
