@@ -1,4 +1,4 @@
- # ใบงาน: การ Deploy แอปพลิเคชันด้วย GitHub Actions และ Self-Hosted Runner
+<img width="565" height="459" alt="image" src="https://github.com/user-attachments/assets/2e6900df-2ea8-4437-9cd3-e027c703bba4" /> # ใบงาน: การ Deploy แอปพลิเคชันด้วย GitHub Actions และ Self-Hosted Runner
 ## วัตถุประสงค์
 
 1. อธิบายหลักการทำงานของ Self-Hosted Runner แบบ Pull-based Model ได้
@@ -963,6 +963,8 @@ tail -f ~/actions-runner/_diag/Runner_*.log
   ```
   บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
   ```
+  <img width="1916" height="939" alt="image" src="https://github.com/user-attachments/assets/3fcc46b5-ee8a-4c94-87b7-6edb08bed20f" />
+
 
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
@@ -1060,6 +1062,8 @@ docker logs nodejs-selfhosted-app
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
+<img width="1025" height="86" alt="image" src="https://github.com/user-attachments/assets/ec98c56e-2700-4557-bc03-d2ddad1a8eca" />
+
 
 ### ส่วนที่ 8: Monitoring และ Troubleshooting 
 
@@ -1145,6 +1149,8 @@ watch -n 10 ./monitor.sh
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
+<img width="565" height="459" alt="image" src="https://github.com/user-attachments/assets/7716e342-b80c-44b8-87d4-6da4186ee01a" />
+
 
 ## สรุปจุดสำคัญ
 
@@ -1188,7 +1194,8 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+Pull-based คือ Runner เป็นฝ่ายดึงงานจาก GitHub เอง ไม่ต้องให้ GitHub เข้ามาเรียกเครื่องเรา
+ข้อดีคือปลอดภัยกว่า ไม่ต้องเปิดพอร์ต และใช้หลัง Firewall ได้
 
 
 </details>
@@ -1198,7 +1205,8 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+เพราะ GitHub ไม่สามารถเข้ามาสั่งงานเครื่องเราโดยตรง
+Runner เป็นฝ่ายเชื่อมต่อออกไปเอง ลดความเสี่ยงจากการโจมตี
 
 
 </details>
@@ -1208,7 +1216,8 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+เพราะ npm ci ติดตั้ง package ตาม package-lock.json ทุกครั้ง
+ทำให้ได้ผลลัพธ์เหมือนเดิม เสถียร และเหมาะกับ production
 
 
 </details>
@@ -1218,7 +1227,8 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+เพราะใครก็ส่งโค้ดเข้ามาได้ เสี่ยงให้โค้ดอันตรายมารันบนเครื่องเรา
+จึงควรใช้เฉพาะ Private Repository
 
 
 </details>
@@ -1228,8 +1238,8 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
-
+nginx คือ Web Server และ Reverse Proxy
+ช่วยรับ request แทน backend เพิ่มความปลอดภัยและจัดการระบบได้ดีขึ้น
 
 </details>
 ---
