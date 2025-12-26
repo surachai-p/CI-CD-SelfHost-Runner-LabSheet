@@ -1073,7 +1073,7 @@ Current runner version: '2.330.0'
 
 ### บันทึกรูปผลการทดลอง
 
-
+<img width="1885" height="944" alt="image" src="https://github.com/user-attachments/assets/55ed0b96-da23-4624-8d09-5bf63d546d07" />
 
 ```
 
