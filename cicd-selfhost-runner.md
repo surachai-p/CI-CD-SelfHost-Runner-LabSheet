@@ -1194,7 +1194,9 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+คือ: รูปแบบที่เครื่อง Runner เป็นฝ่าย "เชื่อมต่อออกไป" (Outbound) หา GitHub เพื่อของานทำเอง (Long Polling) ไม่ต้องรอให้ GitHub ส่งคำสั่งเข้ามา
+
+ข้อดี: ไม่ต้องเปิด Port ขาเข้า (Inbound Port) ที่ Firewall/Router ทำให้ติดตั้งง่ายและปลอดภัย รันในเครือข่ายส่วนตัว (Private Network) ได้เลย
 
 
 </details>
@@ -1204,7 +1206,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ เพราะ Pull-based ไม่ต้องเปิดช่องทาง (Port) รอรับการเชื่อมต่อจากภายนอก ทำให้แฮกเกอร์ไม่สามารถสแกนเจอหรือเจาะเข้ามาได้ ต่างจาก Push-based ที่ต้องเปิดประตูบ้านรอไว้ซึ่งเสี่ยงต่อการถูกโจมตี
 
 
 </details>
@@ -1214,7 +1216,11 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ความแม่นยำ (Deterministic): การันตีว่าได้เวอร์ชันตรงตาม package-lock.json 100% (ไม่แอบอัปเดตเอง)
+
+ความสะอาด: ลบ node_modules เก่าทิ้งก่อนเสมอ ป้องกันไฟล์ขยะตกค้าง
+
+ความเร็ว: ทำงานเร็วกว่าในระบบ CI/CD
 
 
 </details>
@@ -1224,7 +1230,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+เสี่ยงโดนวางยา: คนแปลกหน้าสามารถ Fork โค้ดไปแก้เป็นไวรัสหรือสคริปต์ขุดเหมือง แล้วส่ง Pull Request กลับมา ซึ่งจะทำให้โค้ดอันตรายนั้น รันบนเครื่องคอมพิวเตอร์ของคุณและเข้าถึงเครือข่ายภายในบ้าน/บริษัทได้ทันที
 
 
 </details>
@@ -1234,7 +1240,21 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ Nginx: คือ Web Server ประสิทธิภาพสูง ความสำคัญของ Reverse Proxy: ทำหน้าที่เป็นด่านหน้าคอยรับแขกแทน Node.js ช่วยจัดการเรื่อง ความปลอดภัย (SSL/HTTPS), ซ่อน Port จริงของแอป, และ รับรองการเชื่อมต่อจำนวนมาก (Load Balancing) ได้ดีกว่า
+
+
+</details>
+
+
+### 6. ความแตกต่างระหว่างการรัน Runner บน Windows และ Linux คืออะไร
+<details>
+<summary>คำตอบ</summary>
+
+Shell (ภาษาคำสั่ง): Windows ใช้ PowerShell (คำสั่งต่างจาก Linux), Linux ใช้ Bash
+
+ระบบไฟล์: Windows มักเจอปัญหา Path ยาวเกิน (Long Path) และ ลบไฟล์ที่ถูกใช้งานอยู่ไม่ได้ (File Locking)
+
+Docker: Linux รัน Docker ได้โดยตรง (Native) แต่ Windows ต้องรันผ่าน Virtual Machine (WSL2) ทำให้ Linux มักจะเร็วกว่าและปัญหาน้อยกว่า
 
 
 </details>
