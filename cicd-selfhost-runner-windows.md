@@ -1073,12 +1073,9 @@ Current runner version: '2.330.0'
 
 ### บันทึกรูปผลการทดลอง
 
-```
-บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
-และแสดง Runner status เป็น "Idle" สีเขียว
-```
 
----
+
+```
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
 
