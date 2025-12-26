@@ -1,0 +1,29 @@
+name: Check PR Deadline
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check-date:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Deadline
+        run: |
+          # กำหนดวันตายตัว (Format: YYYY-MM-DD)
+          DEADLINE="2025-12-29"
+          
+          # แปลงวันที่เป็น Timestamp เพื่อเปรียบเทียบ
+          DEADLINE_TS=$(date -d "$DEADLINE" +%s)
+          CURRENT_TS=$(date +%s)
+          
+          echo "Deadline: $DEADLINE"
+          echo "Today: $(date +%Y-%m-%d)"
+
+          if [ "$CURRENT_TS" -gt "$DEADLINE_TS" ]; then
+            echo "❌ Error: This PR has exceeded the deadline of $DEADLINE."
+            exit 1  # สั่งให้ Pipeline Failed (Merge ไม่ได้ถ้าตั้ง Protection ไว้)
+          else
+            echo "✅ Pass: Within deadline."
+            exit 0
+          fi
