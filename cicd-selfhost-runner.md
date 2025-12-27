@@ -961,7 +961,7 @@ tail -f ~/actions-runner/_diag/Runner_*.log
 
   ### บันทึกรูปผลการทดลอง
   ```
-![Uploading ภาพถ่ายหน้าจอ 2568-12-27 เวลา 12.24.06.png…]()
+<img width="1470" height="885" alt="ภาพถ่ายหน้าจอ 2568-12-27 เวลา 12 24 06" src="https://github.com/user-attachments/assets/73929a5c-4ea7-4385-8d70-7d105e83ad71" />
   ```
 
 
