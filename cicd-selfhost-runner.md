@@ -964,6 +964,7 @@ tail -f ~/actions-runner/_diag/Runner_*.log
   ```
   บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
   ```
+  ![alt text](image.png)
 
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
@@ -1061,6 +1062,7 @@ docker logs nodejs-selfhosted-app
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
+![alt text](image-1.png)
 
 ### ส่วนที่ 8: Monitoring และ Troubleshooting 
 
@@ -1146,6 +1148,7 @@ watch -n 10 ./monitor.sh
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
+![alt text](image-2.png)
 
 ## สรุปจุดสำคัญ
 
