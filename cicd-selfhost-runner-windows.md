@@ -1260,7 +1260,8 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ```txt
 บันทึกรูปผลการรันคำสั่ง
-<img width="595" height="358" alt="image" src="https://github.com/user-attachments/assets/7d2d87d7-b7d7-4c39-ba6e-eb872bbf5bd0" />
+ <img width="595" height="358" alt="image" src="https://github.com/user-attachments/assets/f12c422d-c1d5-49b4-ac2c-7a24300618cd"/>
+
 
 
 ## 🎯 สรุปจุดสำคัญ
