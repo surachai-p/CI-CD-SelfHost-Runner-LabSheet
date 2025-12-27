@@ -1077,6 +1077,8 @@ Current runner version: '2.330.0'
 บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
 และแสดง Runner status เป็น "Idle" สีเขียว
 ```
+<img width="1916" height="1037" alt="image" src="https://github.com/user-attachments/assets/3784c793-37b4-4cab-9986-cebd2d76422c" />
+
 
 ---
 
@@ -1167,6 +1169,8 @@ docker logs nodejs-selfhosted-app
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
+<img width="778" height="491" alt="image" src="https://github.com/user-attachments/assets/83999301-a440-4d75-ab16-fb2055bcbf53" />
+
 
 ---
 
@@ -1261,6 +1265,8 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
+<img width="595" height="358" alt="image" src="https://github.com/user-attachments/assets/b966e525-7a2d-4fe3-a25b-deef6858b395" />
+
 
 ---
 
@@ -1379,7 +1385,7 @@ taskkill /PID <PID> /F
 ### 1. Pull-based Model ของ Self-Hosted Runner คืออะไร มีข้อดีอย่างไร
 
 <details>
-<summary>คำตอบ</summary>
+<Pull-based Model คือรูปแบบที่ Self-Hosted Runner เป็นฝ่ายเชื่อมต่อไปดึงงาน (job) จาก GitHub เอง ไม่ใช่ให้ GitHub ส่งคำสั่งมาที่เครื่องเราโดยตรง ข้อดีคือไม่ต้องเปิดพอร์ตจากภายนอก ทำให้ปลอดภัยกว่า และควบคุมได้ง่ายว่าเครื่องไหนจะรับงานจาก repository ใด>
 
 เขียนคำตอบลงในช่องนี้
 
@@ -1388,7 +1394,7 @@ taskkill /PID <PID> /F
 ### 2. ทำไม Pull-based ปลอดภัยกว่า Push-based
 
 <details>
-<summary>คำตอบ</summary>
+<Pull-based ปลอดภัยกว่าเพราะเซิร์ฟเวอร์ของเราเป็นฝ่ายออกไปเชื่อมต่อหา GitHub เอง จึงไม่ต้องเปิดพอร์ตหรือรับคำสั่งจากภายนอกโดยตรง ลดความเสี่ยงจากการโจมตีและการเข้าถึงระบบโดยไม่ได้รับอนุญาต>
 
 เขียนคำตอบลงในช่องนี้
 
@@ -1397,7 +1403,7 @@ taskkill /PID <PID> /F
 ### 3. ทำไมต้องใช้ npm ci แทน npm install ใน production
 
 <details>
-<summary>คำตอบ</summary>
+<npm ci ใช้ไฟล์ package-lock.json เป็นหลัก ทำให้ติดตั้ง dependency ได้ตรงตามเวอร์ชันเดิมทุกครั้ง เร็วกว่าและเสถียรกว่า npm install เหมาะกับ production เพราะลดปัญหา dependency เปลี่ยนโดยไม่ตั้งใจ>
 
 เขียนคำตอบลงในช่องนี้
 
@@ -1406,7 +1412,7 @@ taskkill /PID <PID> /F
 ### 4. ทำไมห้ามใช้ Self-Hosted Runner กับ Public Repository
 
 <details>
-<summary>คำตอบ</summary>
+<เพราะ Public Repository ใครก็สามารถส่งโค้ดหรือแก้ไข workflow ได้ ถ้าใช้ Self-Hosted Runner อาจทำให้ผู้ไม่หวังดีรันคำสั่งอันตรายบนเครื่องเซิร์ฟเวอร์เราได้ เสี่ยงต่อข้อมูลและความปลอดภัยของระบบ>
 
 เขียนคำตอบลงในช่องนี้
 
@@ -1415,7 +1421,7 @@ taskkill /PID <PID> /F
 ### 5. Nginx คืออะไร และการทำ Reverse Proxy ใน Nginx มีความสำคัญอย่างไร
 
 <details>
-<summary>คำตอบ</summary>
+<Nginx คือเว็บเซิร์ฟเวอร์ที่ทำงานได้เร็วและรองรับผู้ใช้จำนวนมาก การทำ Reverse Proxy ช่วยรับ request จากผู้ใช้แล้วส่งต่อไปยัง backend ทำให้ซ่อนโครงสร้างภายใน เพิ่มความปลอดภัย และช่วยจัดการโหลดของระบบได้ดีขึ้น>
 
 เขียนคำตอบลงในช่องนี้
 
@@ -1424,7 +1430,7 @@ taskkill /PID <PID> /F
 ### 6. ความแตกต่างระหว่างการรัน Runner บน Windows และ Linux คืออะไร
 
 <details>
-<summary>คำตอบ</summary>
+<Runner บน Linux ทำงานได้เสถียรและเหมาะกับงาน server มากกว่า รองรับ bash และเครื่องมือ DevOps ได้ดี ส่วน Windows Runner ใช้งานง่ายสำหรับระบบที่พึ่งพา Windows แต่ต้องระวังเรื่อง shell, execution policy และความเข้ากันของสคริปต์>
 
 เขียนคำตอบลงในช่องนี้
 
