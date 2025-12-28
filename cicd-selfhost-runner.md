@@ -1188,52 +1188,20 @@ watch -n 10 ./monitor.sh
 
 ## คำถามท้ายบท
 
-### 1. Pull-based Model ของ Self-Hosted Runner คืออะไร มีข้อดีอย่างไร
+1. Pull-based Model ของ Self-Hosted Runner คืออะไร มีข้อดีอย่างไร
+Pull-based Model คือระบบที่ Self-Hosted Runner จะเป็นตัวหลักที่ "ดึง" งาน (Job) มาจาก GitHub Server แบบ Polling (สอบถามอยู่เรื่อย ๆ) แทนที่จะรอให้ GitHub Push งานเข้ามา ในรูปแบบนี้ Runner จะเชื่อมต่อออกไปยัง GitHub Server ทุก ๆ กี่วินาที เพื่อถามว่า "มีงานใหม่ไหม" ถ้ามีก็จะดึงมาทำ ข้อดีของวิธีนี้คือ Self-Hosted Runner ไม่จำเป็นต้องเปิด Inbound Port เพื่อให้ GitHub Server เข้ามา ซึ่งทำให้ความเสี่ยงด้านความปลอดภัยลดลงมาก นอกจากนี้ Runner ยังสามารถทำงานได้แม้อยู่หลัง Firewall หรือ NAT ได้ เพราะเป็นการเชื่อมต่อออกไปเพียงอย่างเดียว
 
-<details>
-<summary>คำตอบ</summary>
+2. ทำไม Pull-based ปลอดภัยกว่า Push-based
+ในแบบ Push-based GitHub Server จำเป็นต้องเชื่อมต่อเข้าไปยัง Self-Hosted Runner โดยตรง ซึ่งต้องเปิด Inbound Port เพื่อให้ GitHub Server สามารถเข้าถึงได้ วิธีนี้เพิ่มจุดเสี่ยงด้านความปลอดภัยเพราะ Port ที่เปิดสามารถถูกโจมตีหรือใช้ประโยชน์ได้ หากมี Vulnerability ในระบบ ในทางกลับกัน Pull-based Model ทำให้ Runner เป็นตัวเชื่อมต่อออกไปเท่านั้น โดยใช้ Token สำหรับการตรวจสอบตัวตน การเชื่อมต่อแบบนี้ปลอดภัยกว่าเพราะไม่ต้องเปิด Port ยิ่งไปกว่านั้น หากมีความล้มเหลวในการตรวจสอบตัวตน Runner ก็จะไม่สามารถดึงงานได้ ซึ่งป้องกันการเข้าถึงโดยไม่ได้รับอนุญาตได้ดี
 
- เขียนคำตอบลงในช่องนี้
+3. ทำไมต้องใช้ npm ci แทน npm install ใน production
+npm install และ npm ci ต่างกันในเรื่องของการจัดการ Dependencies npm install จะติดตั้ง Version ที่กำหนดในไฟล์ package.json แต่อาจสร้าง package-lock.json ใหม่หรือปรับปรุง Dependency ได้ ถ้ามี Version ที่ใกล้เคียง ในทางกลับกัน npm ci (Clean Install) จะติดตั้ง Dependencies ตามข้อมูลที่อยู่ในไฟล์ package-lock.json อย่างแน่นอน ไม่มีการเปลี่ยนแปลง ทำให้แน่ใจได้ว่าสิ่งที่ติดตั้งในเครื่อง Production จะเหมือนกับที่ติดตั้งในเครื่องของเรา หรือของ Colleague ทุกคนพอดี ซึ่งป้องกันปัญหา "ทำไมมันทำงานในเครื่องของฉัน แต่ใน Server ไม่ทำงาน" ได้อย่างดี
 
+4. ทำไมห้ามใช้ Self-Hosted Runner กับ Public Repository
+Public Repository หมายถึงเก็บ Code ที่ใครๆ สามารถเห็นและดาวน์โหลดได้โดยไม่ต้องขออนุญาต ถ้าเราใช้ Self-Hosted Runner กับ Public Repository ผู้ไม่ประสงค์ดีสามารถสร้าง Pull Request ขึ้นมาได้ และเมื่อ Workflow ทำงาน มันจะรันบน Self-Hosted Runner ของเรา นี่คือจุดอ่อนเพราะ Pull Request นั้นอาจประกอบด้วย Malicious Code ที่พยายามขโมยข้อมูลลับ (เช่น Environment Variables, Secrets, SSH Keys) หรือทำลายระบบของเรา GitHub เองยังแนะนำให้ใช้ Public Runner (GitHub-hosted Runner) สำหรับ Public Repository เพื่อปลอดภัยมากขึ้น หากจำเป็นต้องใช้ Self-Hosted Runner ควรจำกัดเฉพาะ Private Repository เท่านั้น
 
-</details>
-
-### 2. ทำไม Pull-based ปลอดภัยกว่า Push-based
-
-<details>
-<summary>คำตอบ</summary>
-
- เขียนคำตอบลงในช่องนี้
-
-
-</details>
-
-### 3. ทำไมต้องใช้ npm ci แทน npm install ใน production
-
-<details>
-<summary>คำตอบ</summary>
-
- เขียนคำตอบลงในช่องนี้
-
-
-</details>
-
-### 4. ทำไมห้ามใช้ Self-Hosted Runner กับ Public Repository
-
-<details>
-<summary>คำตอบ</summary>
-
- เขียนคำตอบลงในช่องนี้
-
-
-</details>
-
-
-### 5. nginx คืออะไร และการทำ Revers Proxy ใน nginx มีความสำคัญอย่างไร
-<details>
-<summary>คำตอบ</summary>
-
- เขียนคำตอบลงในช่องนี้
+5. nginx คืออะไร และการทำ Reverse Proxy ใน nginx มีความสำคัญอย่างไร
+Nginx เป็น Web Server ที่มีประสิทธิภาพสูงและเบาน้อย นอกจากจะใช้เพื่อให้บริการ Static Files แล้ว Nginx ยังสามารถทำหน้าที่เป็น Reverse Proxy ได้ ซึ่งหมายความว่า Nginx จะเป็นจุดทางเข้า (Entry Point) สำหรับ Request ทั้งหมดจาก Client แล้วส่งต่อไปยัง Application Server (ในกรณีของเราคือ Node.js Server) การทำ Reverse Proxy มีความสำคัญหลายประการ: แรก มันให้การปกป้องขั้นหนึ่ง เพราะ Application Server จะไม่เปิดให้ Client เข้าถึงโดยตรง สอง Nginx สามารถจัดการ HTTPS/SSL, Compression, และ Caching ได้ ซึ่งช่วยปรับปรุงประสิทธิภาพและความปลอดภัย สาม หากมี Multiple Application Server Nginx สามารถทำการ Load Balancing ได้ โดยกระจาย Request ไปยัง Server ต่างๆ เพื่อลดโหลด นอกจากนี้ Nginx ยังใช้ Memory น้อย CPU ต่ำ และสามารถจัดการ Concurrent Connections จำนวนมากได้ ซึ่งเหมาะสำหรับการใช้เป็น Reverse Proxy ในสถาปัตยกรรมสมัยใหม่
 
 
 </details>
