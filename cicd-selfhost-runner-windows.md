@@ -1073,10 +1073,8 @@ Current runner version: '2.330.0'
 
 ### บันทึกรูปผลการทดลอง
 
-```
-บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
-และแสดง Runner status เป็น "Idle" สีเขียว
-```
+<img width="937" height="500" alt="image" src="https://github.com/user-attachments/assets/bd7a1791-7ed8-4c63-b9a1-86a0a76c3721" />
+
 
 ---
 
