@@ -1162,9 +1162,8 @@ docker logs nodejs-selfhosted-app
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
 
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+<img width="602" height="138" alt="image" src="https://github.com/user-attachments/assets/4ad80d25-a687-4bd8-ba54-35d03195a904" />
+
 
 ---
 
