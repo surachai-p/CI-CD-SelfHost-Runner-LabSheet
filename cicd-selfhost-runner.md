@@ -961,9 +961,8 @@ tail -f ~/actions-runner/_diag/Runner_*.log
 2. ควรเห็น runner แสดงสถานะ **Idle** สีเขียว
 
   ### บันทึกรูปผลการทดลอง
-  ```
-  บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
-  ```
+  <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/04fe9fdb-a862-4ffd-83df-94433f298cdf" />
+
 
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
@@ -1058,9 +1057,8 @@ docker logs nodejs-selfhosted-app
 ```
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+<img width="1098" height="111" alt="image" src="https://github.com/user-attachments/assets/f61dbac1-5168-41a7-8208-d3dcc951d802" />
+
 
 ### ส่วนที่ 8: Monitoring และ Troubleshooting 
 
@@ -1143,9 +1141,8 @@ chmod +x monitor.sh
 watch -n 10 ./monitor.sh
 ```
 ### บันทึกผลการรัน monitor.sh
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f9278cc3-9192-41c0-b2f3-41d0e55312d6" />
+
 
 ## สรุปจุดสำคัญ
 
@@ -1189,9 +1186,16 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ คือ รูปแบบการทำงานที่ ฝั่งผู้รับงาน (Runner) เป็นฝ่ายดึงงานเองจากศูนย์กลาง (GitHub) ไม่ใช่ให้ศูนย์กลางส่งงานเข้ามา
+ในบริบทของ GitHub Actions – Self-Hosted Runner Runner จะเชื่อมต่อออกไปหา GitHub เอง (Outbound)
+คอยถามเป็นระยะ ๆ ว่า“มีงานให้ฉันทำไหม?” ถ้ามีงาน GitHub จะส่งรายละเอียดงานกลับมา ถ้าไม่มีงาน Runner ก็รอต่อ (Polling / Long-Polling)
 
-
+  ข้อดี
+- Runner เป็นฝ่าย ดึง (Pull) งานจาก GitHub ไม่ใช่ GitHub ส่ง (Push) งานมา
+- Runner ทำการ Polling (ตรวจสอบเป็นระยะ) ไปที่ GitHub API
+- ไม่ต้องเปิด Port ให้โลกภายนอกเข้าถึง
+- ไม่ต้องมี Static IP Address
+                                              
 </details>
 
 ### 2. ทำไม Pull-based ปลอดภัยกว่า Push-based
@@ -1199,8 +1203,9 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
-
+ Pull-based ปลอดภัยกว่า Push-based เพราะ Runner เป็นฝ่ายเชื่อมต่อออกไปหา GitHub เองผ่าน HTTPS โดยไม่ต้องเปิดพอร์ตให้บุคคลภายนอกเข้าถึง จึงลดความเสี่ยงด้านความปลอดภัยของระบบ
+ 
+*** Push-based GitHub → เชื่อมต่อเข้ามาที่ Runner โดยตรง ต้องเปิดพอร์ตและตั้งค่า Firewall เสี่ยงต่อการถูกโจมตีจากภายนอก
 
 </details>
 
@@ -1209,8 +1214,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
-
+ ต้องใช้ npm ci แทน npm install ใน production เพราะ npm ci ติดตั้งแพ็กเกจตาม package-lock.json ทำให้เวอร์ชันของไลบรารีมีความแน่นอน ช่วยลดความผิดพลาดจากความแตกต่างของสภาพแวดล้อม จึงได้ผลลัพธ์ที่เหมือนกันทุกครั้งและเหมาะกับระบบ CI/CD  
 
 </details>
 
@@ -1219,8 +1223,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
-
+ ห้ามใช้ Self-Hosted Runner กับ Public Repository เพราะบุคคลภายนอกสามารถส่งโค้ดหรือ Workflow ที่เป็นอันตรายให้รันบนเครื่อง Runner ได้โดยตรง ทำให้เสี่ยงต่อการควบคุมเครื่อง การรั่วไหลของข้อมูลสำคัญ และกระทบต่อระบบภายในทั้งหมด
 
 </details>
 
@@ -1229,8 +1232,13 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+nginx คือเว็บเซิร์ฟเวอร์และ Reverse Proxy ที่ทำหน้าที่รับคำขอจากผู้ใช้งานแล้วส่งต่อไปยังแอปพลิเคชันภายใน
 
+ความสำคัญของการทำ Reverse Proxy ใน nginx
+- ช่วยซ่อนตำแหน่งและรายละเอียดของ Backend Server เพิ่มความปลอดภัย
+- ลดภาระของแอปพลิเคชันหลัก โดยให้ nginx จัดการการเชื่อมต่อแทน
+- รองรับการจัดการ HTTPS, Header และ Security Policy
+- ช่วยให้ระบบมีความเสถียรและเหมาะสำหรับใช้งานใน Production
 
 </details>
 ---
