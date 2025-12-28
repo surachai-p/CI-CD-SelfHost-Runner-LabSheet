@@ -1148,7 +1148,7 @@ watch -n 10 ./monitor.sh
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
-<img width="945" height="592" alt="image" src="https://github.com/user-attachments/assets/e2746d59-09aa-49b4-a6c3-bc036c571111" />
+<img width="891" height="641" alt="image" src="https://github.com/user-attachments/assets/1bdfc3e9-39c6-41cc-8c45-95a3bfbfd867" />
 
 
 ## สรุปจุดสำคัญ
