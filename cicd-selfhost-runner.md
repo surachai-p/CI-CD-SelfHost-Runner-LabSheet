@@ -963,6 +963,7 @@ tail -f ~/actions-runner/_diag/Runner_*.log
   ```
   บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
   ```
+<img width="1166" height="561" alt="image" src="https://github.com/user-attachments/assets/bf48e240-6a38-4195-b91e-1a2b40c9bbf1" />
 
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
