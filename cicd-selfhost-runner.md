@@ -1146,8 +1146,10 @@ chmod +x monitor.sh
 watch -n 10 ./monitor.sh
 ```
 ### บันทึกผลการรัน monitor.sh
-```txt
-บันทึกรูปผลการรันคำสั่ง
+ติดปัญหาไม่สามารถ deploy ได้จริงๆครับ ผมทำทุกทางแล้วครับ
+``txt
+<img width="490" height="299" alt="image" src="https://github.com/user-attachments/assets/eefa00a3-7fe7-435c-9750-31b554eeba8f" />
+
 ```
 
 ## สรุปจุดสำคัญ
