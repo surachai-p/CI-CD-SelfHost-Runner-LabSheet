@@ -1073,10 +1073,8 @@ Current runner version: '2.330.0'
 
 ### บันทึกรูปผลการทดลอง
 
-```
-บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
-และแสดง Runner status เป็น "Idle" สีเขียว
-```
+<img width="1919" height="1071" alt="image" src="https://github.com/user-attachments/assets/5ba382e5-f8d1-41e5-af78-e1c01f5a0528" />
+
 
 ---
 
@@ -1164,9 +1162,8 @@ docker logs nodejs-selfhosted-app
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
 
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+<img width="1883" height="995" alt="image" src="https://github.com/user-attachments/assets/39f11b26-158f-41a3-9d36-5657a24b0a21" />
+
 
 ---
 
@@ -1258,9 +1255,8 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ### บันทึกผลการรัน monitor.ps1
 
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+<img width="1919" height="1020" alt="image" src="https://github.com/user-attachments/assets/c5e906c1-fbf6-4008-a017-6db55d82d433" />
+
 
 ---
 
@@ -1378,57 +1374,131 @@ taskkill /PID <PID> /F
 
 ### 1. Pull-based Model ของ Self-Hosted Runner คืออะไร มีข้อดีอย่างไร
 
-<details>
-<summary>คำตอบ</summary>
+Pull-based คือ Runner เป็นฝ่ายวิ่งไปถาม GitHub เองว่า “มีงานให้ทำไหม”
+ไม่ใช่ GitHub ยิงคำสั่งเข้ามาหาเครื่องเราโดยตรง
 
-เขียนคำตอบลงในช่องนี้
+ข้อดีที่เห็นจากการทดลอง
 
-</details>
+- เครื่อง Runner ไม่ต้องเปิดพอร์ตให้คนข้างนอกยิงเข้า
+
+- รันหลัง firewall / NAT ได้สบาย
+
+- คุมความปลอดภัยได้เอง เพราะ runner จะรับงานเฉพาะ repo ที่ผูกไว้
 
 ### 2. ทำไม Pull-based ปลอดภัยกว่า Push-based
 
-<details>
-<summary>คำตอบ</summary>
+ull-based
 
-เขียนคำตอบลงในช่องนี้
+- Runner ต่อออกไปหา GitHub ผ่าน HTTPS
 
-</details>
+- ไม่มี inbound traffic
+
+- ไม่มี webhook ที่ต้องเปิด public
+
+Push-based
+
+- ต้องเปิด endpoint รอรับคำสั่ง
+
+- ถ้า config พลาด = เสี่ยงโดนยิง / spoof
+
+
+Pull-based = โอกาสพลาดน้อยกว่า
+เพราะ เราไม่ต้องเปิดอะไรให้คนอื่นเข้ามา
 
 ### 3. ทำไมต้องใช้ npm ci แทน npm install ใน production
 
-<details>
-<summary>คำตอบ</summary>
+npm install
 
-เขียนคำตอบลงในช่องนี้
+- บางครั้ง dependency version เปลี่ยน
 
-</details>
+- build รอบนี้ผ่าน รอบหน้าพัง
+
+- package-lock.json อาจโดนแก้เอง
+
+npm ci
+
+- ลบ node_modules ทิ้งทุกครั้ง
+
+- ติดตั้งตาม package-lock.json เป๊ะ
+
+เ- ร็วกว่า และผลลัพธ์ซ้ำได้
+
+npm ci ทำให้ build เสถียรกว่า และ เดาได้
+เหมาะกับ production มากกว่า
 
 ### 4. ทำไมห้ามใช้ Self-Hosted Runner กับ Public Repository
 
-<details>
-<summary>คำตอบ</summary>
+ถ้าเป็น public repo:
 
-เขียนคำตอบลงในช่องนี้
+- ใครก็ fork แล้วส่ง PR ได้
 
-</details>
+- PR สามารถใส่ command อันตรายได้
+
+- runner ของเราอาจโดนสั่ง:
+
+  - ลบไฟล์
+
+  - ขโมย secret
+
+  - ฝัง malware
+
+Self-hosted runner = เครื่องของเราเอง
+ถ้าเปิดให้ public ใช้ = เท่ากับให้คนแปลกหน้ารันคำสั่งในเครื่องเรา
+- ไม่ควรเด็ดขาด
 
 ### 5. Nginx คืออะไร และการทำ Reverse Proxy ใน Nginx มีความสำคัญอย่างไร
 
-<details>
-<summary>คำตอบ</summary>
+Node.js ฟังอยู่ที่ port 3000
+แต่เราไม่อยากให้คนภายนอกเรียกตรง ๆ
 
-เขียนคำตอบลงในช่องนี้
+Nginx ทำอะไร
 
-</details>
+- รับ request จากภายนอก (port 80 / 443)
+
+- ส่งต่อไปให้ Node.js (port 3000)
+
+- ซ่อน backend เอาไว้
+
+Reverse Proxy สำคัญยังไง
+
+- ไม่ต้องเปิดหลายพอร์ต
+
+- เพิ่ม SSL ง่าย
+
+- ปรับ load / timeout ได้
+
+- Node ล่ม Nginx ยังจัดการ error ให้ได้
+
+
+Nginx = ด่านหน้า
+
+Node.js = คนทำงานหลังบ้าน
 
 ### 6. ความแตกต่างระหว่างการรัน Runner บน Windows และ Linux คืออะไร
 
-<details>
-<summary>คำตอบ</summary>
+Windows
 
-เขียนคำตอบลงในช่องนี้
+- Setup ง่าย (คลิกเยอะ)
 
-</details>
+- Path / script บางทีงง (\ vs /)
+
+- ช้ากว่าเล็กน้อย
+
+- เหมาะกับ dev / lab
+
+Linux
+
+- เสถียรกว่า
+
+- CI/CD friendly มาก
+
+- Script ทำงานตรงไปตรงมา
+
+- ใช้ resource น้อย
+
+ถ้าเป็น production / server จริง
+
+Linux เหมาะกว่า
 
 ---
 
