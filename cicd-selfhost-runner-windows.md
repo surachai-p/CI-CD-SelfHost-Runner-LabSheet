@@ -1377,7 +1377,7 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+ไม่ต้องเปิด Port: ไม่ต้องเปิด Port ให้โลกภายนอกเข้าถึงเครื่อง Server
 
 </details>
 
@@ -1386,7 +1386,7 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+ระบบ Pull-based ปลอดภัยกว่าเพราะ ไม่ต้องมีการเปิด Inbound Port (กฎ Firewall ขาเข้า) ที่เครื่อง Server เพื่อรอรับคำสั่งจากภายนอก การสื่อสารทั้งหมดเกิดขึ้นจากการที่ Runner เป็นผู้เริ่มเชื่อมต่อออกไปหา GitHub (Outbound HTTPS Polling) เอง ทำให้ลดความเสี่ยงจากการถูกโจมตีผ่าน Port ที่เปิดทิ้งไว้
 
 </details>
 
@@ -1395,7 +1395,7 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+ความแม่นยำ (Deterministic): มันจะติดตั้ง dependency ตามเวอร์ชันที่ระบุไว้ใน package-lock.json อย่างเคร่งครัด ทำให้มั่นใจได้ว่าทุกครั้งที่ Build จะได้ Environment ที่เหมือนเดิมทุกประการ
 
 </details>
 
@@ -1404,7 +1404,7 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+เพราะ Self-Hosted Runner คือการรันคำสั่งต่างๆ บนเครื่อง Server หรือคอมพิวเตอร์ของเราโดยตรง หากใช้กับ Public Repository คนแปลกหน้าสามารถ Fork code ของเราไปแก้ แล้วส่ง Pull Request ที่ฝังโค้ดอันตราย (Malicious Code) เพื่อให้ Runner ของเรานำมารันได้ ซึ่งอาจนำไปสู่การถูกขโมยข้อมูลหรือยึดเครื่อง Server ได้ทันที จึงควรใช้กับ Private Repository เท่านั้น
 
 </details>
 
@@ -1413,7 +1413,8 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+Nginx ในบริบทนี้ทำหน้าที่เป็น Reverse Proxy ซึ่งเป็นด่านหน้าในการรับ Request จากผู้ใช้งานก่อนส่งต่อให้ Application Container
+ความสำคัญ : ช่วยจัดการเรื่อง Security Headers เพื่อความปลอดภัย
 
 </details>
 
@@ -1422,7 +1423,8 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+Shell ที่ใช้: บน Windows จะใช้ PowerShell เป็นหลักในการจัดการระบบ แต่ใน Workflow มักจะแนะนำให้ใช้ Git Bash (shell: bash) เพื่อให้คำสั่งเข้ากันได้กับ Linux commands ทั่วไป
+การติดตั้ง Service: ขั้นตอนการติดตั้ง Runner เป็น Service จะใช้คำสั่งต่างกัน (Linux ใช้ svc.sh, Windows ใช้ svc.cmd หรือ PowerShell Scripts)
 
 </details>
 
