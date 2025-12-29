@@ -1377,7 +1377,8 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+Pull-based Model คือรูปแบบการทำงานที่ Self-Hosted Runner เป็นฝ่ายเชื่อมต่อไปยัง GitHub เอง เพื่อดึงงาน มาประมวลผล แทนที่ GitHub จะส่งคำสั่งเข้ามาที่เครื่องโดยตรง
+ข้อดี Runner ไม่จำเป็นต้องเปิดพอร์ตให้เข้าจากภายนอก ลดความเสี่ยงจากการโจมตีจากอินเทอร์เน็ต
 
 </details>
 
@@ -1386,7 +1387,7 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+ไม่มีการเปิดพอร์ตให้รับคำสั่งจากภายนอก ลดความเสี่ยงจากการถูกโจมตีแบบ Remote Code Execution Token ที่ใช้มีอายุสั้นและถูกจำกัดสิทธิ์
 
 </details>
 
@@ -1395,7 +1396,7 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+ใช้ package-lock.json เป็นหลัก ทำให้เวอร์ชัน dependency คงที่
 
 </details>
 
@@ -1404,7 +1405,7 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+ผู้ใช้ภายนอกสามารถส่ง Pull Request ที่มีโค้ดอันตรายได้
 
 </details>
 
@@ -1422,7 +1423,7 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+Nginx คือ Web Server และ Reverse Proxy ที่มีประสิทธิภาพสูง ใช้จัดการ HTTP/HTTPS request เพิ่มความปลอดภัยและความยืดหยุ่นในการ deploy
 
 </details>
 
