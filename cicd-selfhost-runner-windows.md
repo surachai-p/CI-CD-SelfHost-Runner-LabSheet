@@ -1073,10 +1073,8 @@ Current runner version: '2.330.0'
 
 ### บันทึกรูปผลการทดลอง
 
-```
-บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
-และแสดง Runner status เป็น "Idle" สีเขียว
-```
+<img width="937" height="500" alt="image" src="https://github.com/user-attachments/assets/bd7a1791-7ed8-4c63-b9a1-86a0a76c3721" />
+
 
 ---
 
@@ -1164,9 +1162,8 @@ docker logs nodejs-selfhosted-app
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
 
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+<img width="1429" height="469" alt="image" src="https://github.com/user-attachments/assets/219b3a2e-e778-47e4-852b-d27b93c3fe0b" />
+
 
 ---
 
@@ -1258,9 +1255,8 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ### บันทึกผลการรัน monitor.ps1
 
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+<img width="926" height="355" alt="image" src="https://github.com/user-attachments/assets/33ba6789-e6fd-499a-8574-f37a8f488a83" />
+
 
 ---
 
@@ -1381,7 +1377,8 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+Pull-based Model คือรูปแบบการทำงานที่ Self-Hosted Runner เป็นฝ่ายเชื่อมต่อไปยัง GitHub เอง เพื่อดึงงาน มาประมวลผล แทนที่ GitHub จะส่งคำสั่งเข้ามาที่เครื่องโดยตรง
+ข้อดี Runner ไม่จำเป็นต้องเปิดพอร์ตให้เข้าจากภายนอก ลดความเสี่ยงจากการโจมตีจากอินเทอร์เน็ต
 
 </details>
 
@@ -1390,7 +1387,7 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+ไม่มีการเปิดพอร์ตให้รับคำสั่งจากภายนอก ลดความเสี่ยงจากการถูกโจมตีแบบ Remote Code Execution Token ที่ใช้มีอายุสั้นและถูกจำกัดสิทธิ์
 
 </details>
 
@@ -1399,7 +1396,7 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+ใช้ package-lock.json เป็นหลัก ทำให้เวอร์ชัน dependency คงที่
 
 </details>
 
@@ -1408,7 +1405,7 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+ผู้ใช้ภายนอกสามารถส่ง Pull Request ที่มีโค้ดอันตรายได้
 
 </details>
 
@@ -1426,7 +1423,7 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+Nginx คือ Web Server และ Reverse Proxy ที่มีประสิทธิภาพสูง ใช้จัดการ HTTP/HTTPS request เพิ่มความปลอดภัยและความยืดหยุ่นในการ deploy
 
 </details>
 
