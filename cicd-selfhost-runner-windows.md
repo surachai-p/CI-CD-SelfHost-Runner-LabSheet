@@ -1385,7 +1385,14 @@ taskkill /PID <PID> /F
 ### 1. Pull-based Model ของ Self-Hosted Runner คืออะไร มีข้อดีอย่างไร
 
 <details>
-<summary>คำตอบ</summary>
+<summary>คำตอบ  Pull-based Model คือรูปแบบที่ Runner เป็นฝ่ายเชื่อมต่อไปหา GitHub เพื่อขอ (pull) งานมาทำ ไม่ใช่ให้ GitHub ส่ง (push) งานเข้ามาหา Runner
+ข้อดี:
+
+ไม่ต้องเปิด port รับ inbound traffic จาก internet
+ไม่ต้องตั้งค่า firewall ให้ยุ่งยาก
+ปลอดภัยกว่าเพราะ Runner อยู่หลัง NAT/Firewall
+สามารถทำงานใน private network ได้โดยไม่ต้องเปิดเผยเครื่องออกสู่ภายนอก
+ใช้ HTTPS polling เพื่อตรวจสอบงานใหม่จาก GitHub</summary>
 
 เขียนคำตอบลงในช่องนี้
 
@@ -1394,7 +1401,20 @@ taskkill /PID <PID> /F
 ### 2. ทำไม Pull-based ปลอดภัยกว่า Push-based
 
 <details>
-<summary>คำตอบ</summary>
+<summary>คำตอบ Pull-based ปลอดภัยกว่าเพราะ:
+
+ไม่ต้องเปิด port สาธารณะ - ไม่มี endpoint ให้ attacker โจมตี
+ไม่มี surface attack - ไม่มี webhook endpoint ที่อาจถูก exploit
+Connection ออกจากภายใน - Runner เป็นฝ่ายเริ่ม connection (outbound) ซึ่ง firewall อนุญาตได้ง่าย
+Authentication ที่ดีกว่า - ใช้ token ที่ Runner ถือไว้ ไม่ใช่ให้ภายนอกส่งมา
+ป้องกัน unauthorized access - ไม่มีทางที่คนนอกจะส่งคำสั่งเข้ามารันได้
+DDoS protection - ไม่มี public endpoint ให้โจมตี
+
+Push-based (เช่น webhook):
+
+ต้องเปิด port รับ request จากภายนอก
+มี risk ถูกโจมตีผ่าน webhook endpoint
+ต้องมีมาตรการรักษาความปลอดภัยเพิ่มเติม </summary>
 
 เขียนคำตอบลงในช่องนี้
 
@@ -1403,7 +1423,12 @@ taskkill /PID <PID> /F
 ### 3. ทำไมต้องใช้ npm ci แทน npm install ใน production
 
 <details>
-<summary>คำตอบ</summary>
+<summary>คำตอบ ความเร็ว - เร็วกว่า 2-10 เท่า เพราะข้าม dependency resolution
+Reproducible builds - ติดตั้งตาม package-lock.json เท่านั้น รับประกันว่าทุกครั้งได้ package เวอร์ชันเดียวกัน
+Clean install - ลบ node_modules เดิมทิ้งก่อนติดตั้งใหม่ทุกครั้ง
+Fail fast - ถ้า package.json และ package-lock.json ไม่ตรงกัน จะ error ทันที
+Consistency - มั่นใจได้ว่า production ใช้ dependencies เหมือนกับที่ test ไว้
+CI/CD optimized - ออกแบบมาเพื่อ automated deployment </summary>
 
 เขียนคำตอบลงในช่องนี้
 
@@ -1412,7 +1437,27 @@ taskkill /PID <PID> /F
 ### 4. ทำไมห้ามใช้ Self-Hosted Runner กับ Public Repository
 
 <details>
-<summary>คำตอบ</summary>
+<summary>คำตอบ ห้ามใช้ Self-Hosted Runner กับ Public Repository เพราะ:
+
+ความเสี่ยงด้านความปลอดภัย:
+
+ใครก็ได้สามารถ fork repo และส่ง Pull Request
+PR อาจมี malicious code ที่จะรันบน Runner ของคุณ
+Attacker สามารถขโมยข้อมูล secrets, credentials, หรือ source code อื่นๆ
+สามารถใช้เครื่องของคุณเป็นจุดโจมตีเครื่องอื่นๆ ใน network
+
+
+การเข้าถึง Network:
+
+Runner อยู่ใน private network อาจเข้าถึงระบบภายในได้
+อาจถูกใช้เป็น pivot point โจมตีระบบอื่นๆ
+เสี่ยงต่อการ data exfiltration
+
+
+Resource abuse:
+
+อาจถูกใช้ขุด cryptocurrency
+ใช้ bandwidth และ computing resources</summary>
 
 เขียนคำตอบลงในช่องนี้
 
@@ -1421,7 +1466,33 @@ taskkill /PID <PID> /F
 ### 5. Nginx คืออะไร และการทำ Reverse Proxy ใน Nginx มีความสำคัญอย่างไร
 
 <details>
-<summary>คำตอบ</summary>
+<summary>คำตอบ Nginx คืออะไร:
+
+Web server และ reverse proxy server ที่มีประสิทธิภาพสูง
+เป็น open-source, รองรับ high concurrency
+ใช้ memory น้อย, ประมวลผลเร็ว
+เป็นทางเลือกยอดนิยมแทน Apache
+
+Reverse Proxy คืออะไร:
+
+ตัวกลางระหว่าง client และ backend server
+Client ส่ง request มาที่ Nginx → Nginx forward ไปยัง backend → ส่ง response กลับมาให้ client
+
+ความสำคัญของ Reverse Proxy:
+
+Load Balancing - กระจายโหลดไปหลาย backend servers
+SSL/TLS Termination - จัดการ HTTPS ที่จุดเดียว backend ใช้ HTTP ธรรมดา
+Security - ซ่อน backend servers, ป้องกัน direct access
+Caching - cache static content เพิ่มความเร็ว
+Compression - บีบอัดข้อมูลก่อนส่งให้ client
+URL Rewriting - แก้ไข URL structure
+Rate Limiting - จำกัดจำนวน request ป้องกัน DDoS
+Single Entry Point - จัดการหลาย services ผ่าน domain/port เดียว
+
+ตัวอย่างการใช้งาน:
+Client → Nginx (port 80/443) → Node.js (port 3000)
+                               → API Server (port 5000)
+                               → Static Files </summary>
 
 เขียนคำตอบลงในช่องนี้
 
@@ -1430,7 +1501,40 @@ taskkill /PID <PID> /F
 ### 6. ความแตกต่างระหว่างการรัน Runner บน Windows และ Linux คืออะไร
 
 <details>
-<summary>คำตอบ</summary>
+<summary>คำตอบ 1. คำสั่งและไฟล์:
+
+Windows ใช้ไฟล์ .cmd เช่น config.cmd, run.cmd และรันผ่าน Command Prompt หรือ PowerShell
+Linux ใช้ไฟล์ .sh เช่น config.sh, run.sh และรันผ่าน Bash shell
+
+2. Path และ File System:
+
+Windows ใช้ backslash (\) สำหรับ path และไม่คำนึงตัวพิมพ์เล็ก-ใหญ่
+Linux ใช้ forward slash (/) และคำนึงตัวพิมพ์เล็ก-ใหญ่
+
+3. การจัดการ Service:
+
+Windows ติดตั้งเป็น Windows Service ทำงานใน background
+Linux ใช้ systemd สำหรับจัดการ service ซึ่งเป็น standard ของ Linux
+
+4. ประสิทธิภาพและ Resources:
+
+Linux มีประสิทธิภาพดีกว่า ใช้ RAM น้อยกว่า และเร็วกว่าโดยเฉพาะการทำงานกับ I/O
+Windows ใช้ resource มากกว่าและช้ากว่าในบาง workload
+
+5. Docker และ Container:
+
+Linux รองรับ Docker แบบ native ทำงานได้เร็วและมีเสถียรภาพสูง
+Windows ต้องใช้ Docker Desktop และมีข้อจำกัดในการทำงานบางอย่าง
+
+6. ค่าใช้จ่าย:
+
+Linux ส่วนใหญ่เป็น open-source และฟรี
+Windows Server ต้องซื้อ license
+
+7. Use Cases:
+
+Windows เหมาะสำหรับ .NET Framework apps และ Windows-specific software
+Linux เป็น standard ของ DevOps, Cloud, และ production environments ส่วนใหญ่</summary>
 
 เขียนคำตอบลงในช่องนี้
 
