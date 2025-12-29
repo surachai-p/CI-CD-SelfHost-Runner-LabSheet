@@ -1,4 +1,4 @@
- # ใบงาน: การ Deploy แอปพลิเคชันด้วย GitHub Actions และ Self-Hosted Runner
+# ใบงาน: การ Deploy แอปพลิเคชันด้วย GitHub Actions และ Self-Hosted Runner
 ## วัตถุประสงค์
 
 1. อธิบายหลักการทำงานของ Self-Hosted Runner แบบ Pull-based Model ได้
@@ -961,9 +961,7 @@ tail -f ~/actions-runner/_diag/Runner_*.log
 2. ควรเห็น runner แสดงสถานะ **Idle** สีเขียว
 
   ### บันทึกรูปผลการทดลอง
-  ```
-  บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
-  ```
+<img width="1919" height="966" alt="image" src="https://github.com/user-attachments/assets/74f4c239-fbe6-4333-aaf3-5010d1dab5e9" />
 
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
