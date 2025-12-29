@@ -1072,6 +1072,8 @@ Current runner version: '2.330.0'
 3. Label ควรมี: `self-hosted`, `Windows`, `X64`
 
 ### บันทึกรูปผลการทดลอง
+<img width="1844" height="940" alt="image" src="https://github.com/user-attachments/assets/095671fa-c682-4693-831f-ba818b3a87fb" />
+
 
 ```
 บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
@@ -1163,6 +1165,8 @@ docker logs nodejs-selfhosted-app
 ```
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
+<img width="310" height="92" alt="image" src="https://github.com/user-attachments/assets/cd90ae28-97f2-427f-9cab-d9ea355b50c6" />
+
 
 ```txt
 บันทึกรูปผลการรันคำสั่ง
@@ -1257,6 +1261,8 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 ### บันทึกผลการรัน monitor.ps1
+<img width="513" height="219" alt="image" src="https://github.com/user-attachments/assets/62a32c17-762c-4a8c-bee6-212f4aeec375" />
+
 
 ```txt
 บันทึกรูปผลการรันคำสั่ง
