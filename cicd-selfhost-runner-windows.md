@@ -1387,7 +1387,8 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+- เพราะ GitHub ไม่สามารถเข้ามาเชื่อมต่อเครื่องเราเองได้
+- Runner เป็นฝ่ายขอรับงานลดโอกาสโดนโจมตีจากภายนอก
 
 </details>
 
@@ -1396,7 +1397,8 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+- npm ci ใช้ไฟล์ lock (package-lock.json) ติดตั้งตรงตามเวอร์ชัน
+- เร็วกว่าและมั่นใจว่า dependency ไม่เปลี่ยน เสถียรกว่า
 
 </details>
 
@@ -1405,7 +1407,8 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+- Public repo ใครก็เปิด PR ได้ เสี่ยงให้โค้ดอันตรายรันบนเครื่องเรา
+- ป้องกันการโจมตีและการเข้าถึงระบบภายใน
 
 </details>
 
@@ -1414,7 +1417,8 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+- Nginx คือ web server ที่เร็วและเบา
+- Reverse Proxy: ซ่อน backend, กระจายโหลด, เพิ่มความปลอดภัย และทำ SSL termination
 
 </details>
 
@@ -1423,7 +1427,8 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+- Windows: ใช้ PowerShell/Batch, บาง dependency ทำงานช้ากว่า
+- Linux: ใช้ Bash, เสถียรและนิยมมากกว่าในการ deploy production
 
 </details>
 
