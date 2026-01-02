@@ -1074,8 +1074,8 @@ Current runner version: '2.330.0'
 ### บันทึกรูปผลการทดลอง
 
 ```
-บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
-และแสดง Runner status เป็น "Idle" สีเขียว
+<img width="1919" height="1079" alt="Screenshot 2026-01-01 234219" src="https://github.com/user-attachments/assets/42634435-e19f-4f36-b4ee-b2271cf4558b" />
+
 ```
 
 ---
@@ -1164,8 +1164,9 @@ docker logs nodejs-selfhosted-app
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
 
-```txt
-บันทึกรูปผลการรันคำสั่ง
+```
+<img width="836" height="249" alt="Screenshot 2026-01-02 091417" src="https://github.com/user-attachments/assets/3c3dd253-9342-427e-bf1d-90fd620522fc" />
+
 ```
 
 ---
@@ -1259,7 +1260,8 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ### บันทึกผลการรัน monitor.ps1
 
 ```txt
-บันทึกรูปผลการรันคำสั่ง
+<img width="802" height="517" alt="Screenshot 2026-01-02 091649" src="https://github.com/user-attachments/assets/854a3a5c-af66-4234-b234-46bb9637f104" />
+
 ```
 
 ---
@@ -1381,7 +1383,12 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+Pull-based Model คือรูปแบบการทำงานที่ Runner (เครื่อง Server ของเรา) จะเป็นฝ่าย "ดึง" (Pull) งานจาก GitHub มาทำเอง โดยการส่งสัญญาณตรวจสอบ (Polling) ไปที่ GitHub API เป็นระยะๆ ว่ามีงานใหม่หรือไม่ แทนที่จะรอให้ GitHub ส่งคำสั่ง (Push) เข้ามาหาเครื่องเรา
+
+ข้อดี:
+ความปลอดภัยสูง: ไม่ต้องเปิด Inbound Port (ช่องทางเข้า) ที่ Firewall ทำให้คนภายนอกเจาะเข้ามาไม่ได้
+ติดตั้งง่าย: ไม่ต้องมี Public IP หรือ Static IP ก็ทำงานได้
+ยืดหยุ่น: สามารถทำงานอยู่หลัง Firewall องค์กร หรือใน Private Network ได้โดยไม่มีปัญหาการเชื่อมต่อ
 
 </details>
 
@@ -1390,7 +1397,7 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+ปลอดภัยกว่าเพราะ ไม่ต้องเปิดเผยตัวเองต่อโลกภายนอก (No Inbound Rules) ในระบบ Push-based ปกติ (เช่น Webhook) เราต้องเปิด Port เพื่อรอรับคำสั่ง ซึ่งอาจเป็นช่องโหว่ให้แฮกเกอร์สแกนเจอและโจมตีได้ แต่ในระบบ Pull-based เครื่อง Runner เป็นฝ่ายเริ่มการเชื่อมต่อออกไปหา GitHub เอง (Outbound Only) ผ่าน HTTPS ซึ่ง Firewall ส่วนใหญ่อนุญาตอยู่แล้ว ทำให้เราสามารถปิดประตูบ้าน (Port) ให้สนิท ป้องกันผู้ไม่หวังดีเข้ามาได้ 100%
 
 </details>
 
@@ -1399,7 +1406,9 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+ความแม่นยำ (Deterministic): npm ci จะติดตั้ง dependencies ตามเวอร์ชันที่ระบุไว้ในไฟล์ package-lock.json อย่างเคร่งครัด ทำให้มั่นใจว่า Code ที่รันบน Production จะเหมือนกับที่ Test มาทุกประการ (ป้องกันปัญหา "มันทำงานได้บนเครื่องฉันนะ")
+ความสะอาด (Clean Install): npm ci จะลบโฟลเดอร์ node_modules เดิมทิ้งก่อนเริ่มติดตั้งเสมอ เพื่อป้องกันไฟล์เก่าตกค้าง
+ความเร็ว: ทำงานเร็วกว่า npm install ในการทำ Automated Build เพราะข้ามขั้นตอนการคำนวณเวอร์ชันแพ็กเกจใหม่
 
 </details>
 
@@ -1408,7 +1417,7 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+เพราะมีความเสี่ยงด้านความปลอดภัยสูงมาก หากเราเปิด Public Repository คนแปลกหน้าสามารถ Fork โปรเจกต์เราไปใส่ โค้ดอันตราย (เช่น สคริปต์ขุด Bitcoin, สคริปต์ขโมยรหัสผ่าน, หรือคำสั่งลบข้อมูล) แล้วส่ง Pull Request กลับมา ซึ่งจะกระตุ้นให้ Runner ของเราทำงานโค้ดอันตรายนั้นทันที เนื่องจาก Self-Hosted Runner รันบนเครื่องหรือเซิร์ฟเวอร์ส่วนตัวของเรา โค้ดอันตรายนั้นจึงสามารถเข้าถึงไฟล์ ระบบเครือข่าย และสร้างความเสียหายให้กับคอมพิวเตอร์ของเราได้โดยตรง
 
 </details>
 
@@ -1417,7 +1426,10 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+Nginx คือ Web Server ซอฟต์แวร์ที่นิยมใช้ทำหน้าที่เป็น Reverse Proxy (ตัวรับหน้าเสื่อ) ความสำคัญของการทำ Reverse Proxy:
+ความปลอดภัย: ช่วยซ่อน Application Server จริง (Node.js) ไว้ข้างหลัง ไม่ให้ผู้ใช้เข้าถึง Port 3000 โดยตรง ลดความเสี่ยงจากการโจมตี
+จัดการ Traffic: ช่วยจัดการ HTTP Headers, การทำ SSL/HTTPS Termination และการบีบอัดข้อมูล (Gzip) ได้ดีกว่า Node.js
+ความยืดหยุ่น: ง่ายต่อการขยายระบบ (Load Balancing) ในอนาคต
 
 </details>
 
@@ -1426,7 +1438,10 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+Shell Command: Windows ใช้ PowerShell หรือ CMD เป็นหลัก ในขณะที่ Linux ใช้ Bash ซึ่งทำให้ไวยากรณ์คำสั่ง (Syntax) ในไฟล์ Workflow ต่างกัน (เช่น การตั้งค่าตัวแปร Environment หรือคำสั่งพื้นฐาน) ต้องระมัดระวังเรื่อง shell: bash บน Windows
+File System: Windows ใช้ Backslash (\) คั่น Path และไม่คำนึงถึงตัวพิมพ์เล็ก-ใหญ่ (Case-insensitive) มากนัก ส่วน Linux ใช้ Forward Slash (/) และเคร่งครัดเรื่อง Case-sensitive
+Containerization: บน Linux Docker ทำงานบน Kernel โดยตรง (Native) แต่บน Windows ต้องรันผ่าน Docker Desktop (WSL2 Backend) ซึ่งอาจมีการบริโภคทรัพยากรที่ต่างกัน
+System Config: การจัดการ Service, การตั้งค่า User Permission และการจัดการ Path Environment (เช่น ปัญหาที่หา git bash ไม่เจอ) มีความซับซ้อนต่างกัน
 
 </details>
 
