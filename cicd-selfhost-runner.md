@@ -961,9 +961,11 @@ tail -f ~/actions-runner/_diag/Runner_*.log
 2. ควรเห็น runner แสดงสถานะ **Idle** สีเขียว
 
   ### บันทึกรูปผลการทดลอง
-  ```
+  
   บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
-  ```
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/03b620c0-ab44-4f84-bf08-ad224773c883" />
+
+  
 
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
@@ -1058,9 +1060,8 @@ docker logs nodejs-selfhosted-app
 ```
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+<img width="1232" height="106" alt="image" src="https://github.com/user-attachments/assets/78e161f5-17fa-4488-bb7c-42a9e84e8f3c" />
+
 
 ### ส่วนที่ 8: Monitoring และ Troubleshooting 
 
@@ -1143,9 +1144,8 @@ chmod +x monitor.sh
 watch -n 10 ./monitor.sh
 ```
 ### บันทึกผลการรัน monitor.sh
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+<img width="570" height="339" alt="image" src="https://github.com/user-attachments/assets/6f221b13-bd3c-48ba-b6a9-89f13826d5bc" />
+
 
 ## สรุปจุดสำคัญ
 
@@ -1188,8 +1188,9 @@ watch -n 10 ./monitor.sh
 
 <details>
 <summary>คำตอบ</summary>
-
- เขียนคำตอบลงในช่องนี้
+เป็นรูปแบบที่ตัว Runner (เครื่อง Server ของเรา) จะเป็นฝ่ายส่งสัญญาณไปถาม GitHub เป็นระยะ (Polling) เพื่อดึงงานมาทำเอง
+ ข้อดี: * ไม่ต้องตั้งค่า Network ซับซ้อน: ไม่ต้องมี Static IP Address ก็ทำงานได้
+ข้ามข้อจำกัดของ Firewall: สามารถทำงานหลัง Firewall หรือ NAT ได้ขอเพียงแค่เครื่องออกอินเทอร์เน็ตได้
 
 
 </details>
@@ -1199,7 +1200,8 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+"ไม่ต้องเปิด Port (Inbound)" ให้โลกภายนอกเชื่อมต่อเข้ามายังเครื่อง Server ของเรา
+ในขณะที่ Push-based ต้องเปิดช่องทางให้ระบบภายนอกส่งข้อมูลเข้ามา ซึ่งอาจเสี่ยงต่อการถูกโจมตีทางเครือข่ายได้มากกว่า
 
 
 </details>
@@ -1209,7 +1211,9 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ ความแม่นยำ: npm ci จะอ่านข้อมูลจากไฟล์ package-lock.json โดยตรงเพื่อให้มั่นใจว่า Library ทุกตัวจะเป็นเวอร์ชันเดิมเป๊ะๆ ตามที่ Dev ทดสอบไว้
+ความเร็ว: npm ci มักจะทำงานเร็วกว่าเพราะข้ามขั้นตอนการวิเคราะห์เวอร์ชันใหม่ๆ
+ความเสถียร: หากข้อมูลใน package.json กับ package-lock.json ไม่ตรงกัน npm ci จะแจ้ง Error ทันทีเพื่อป้องกันระบบพังในภายหลัง
 
 
 </details>
@@ -1219,7 +1223,8 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+เพราะหากเป็น Public Repository ใครก็ได้สามารถส่ง Pull Request (PR) ที่แฝง Code อันตรายมาได้
+เมื่อ GitHub Actions รัน Code นั้นบนเครื่อง Self-hosted ของเรา Hacker จะสามารถเข้าถึงไฟล์ในเครื่อง สั่งรันคำสั่งอันตราย หรือขโมยข้อมูลสำคัญใน Server ของเราได้ทันที
 
 
 </details>
@@ -1229,7 +1234,10 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ซอฟต์แวร์ Web Server ที่มีความเร็วสูง นิยมนำมาใช้จัดการ Traffic อินเทอร์เน็ต
+ความสำคัญของ Reverse Proxy: * ความปลอดภัย: ช่วยซ่อนโครงสร้างภายใน (เช่น Port 3000 ของ Node.js) ไม่ให้คนภายนอกเห็นโดยตรง
+ความเป็นระเบียบ: สามารถรับ Request จาก Port มาตรฐาน (80/443) แล้วส่งต่อไปยังแอปพลิเคชันที่รันอยู่พอร์ตต่างๆ ได้
+ประสิทธิภาพ: ช่วยทำหน้าที่จัดการ Load Balancing, Gzip Compression และจัดการ SSL (HTTPS) ได้อย่างมีประสิทธิภาพ
 
 
 </details>
