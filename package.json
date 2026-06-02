@@ -1,0 +1,25 @@
+{
+  "name": "nodejs-cicd-selfhosted",
+  "version": "1.0.0",
+  "description": "CI/CD Demo with Self-Hosted GitHub Actions Runner",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "cicd",
+    "docker",
+    "self-hosted",
+    "github-actions"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
