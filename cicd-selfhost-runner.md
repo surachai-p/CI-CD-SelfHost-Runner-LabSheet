@@ -961,8 +961,11 @@ tail -f ~/actions-runner/_diag/Runner_*.log
 2. ควรเห็น runner แสดงสถานะ **Idle** สีเขียว
 
   ### บันทึกรูปผลการทดลอง
-  ```
-  บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
+  ``
+<img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/12018aa9-e12e-4cfd-bd2b-60b5c4301bad" />
+
+
+
   ```
 
 
@@ -1058,8 +1061,9 @@ docker logs nodejs-selfhosted-app
 ```
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
-```txt
-บันทึกรูปผลการรันคำสั่ง
+``txt
+<img width="1502" height="118" alt="image" src="https://github.com/user-attachments/assets/33586133-f5de-459c-b6de-7b36a46b8bb2" />
+
 ```
 
 ### ส่วนที่ 8: Monitoring และ Troubleshooting 
@@ -1143,11 +1147,13 @@ chmod +x monitor.sh
 watch -n 10 ./monitor.sh
 ```
 ### บันทึกผลการรัน monitor.sh
-```txt
-บันทึกรูปผลการรันคำสั่ง
+``txt
+<img width="490" height="299" alt="image" src="https://github.com/user-attachments/assets/eefa00a3-7fe7-435c-9750-31b554eeba8f" />
+
 ```
 
 ## สรุปจุดสำคัญ
+ติดปัญหาไม่สามารถ deploy ได้จริงๆครับ ผมทำทุกทางแล้วครับ
 
 ### ✅ ข้อสำคัญสำหรับ Production
 
@@ -1189,7 +1195,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ Pull-based Model คือรูปแบบที่ Self-Hosted Runner จะเป็นฝ่ายเชื่อมต่อไปยัง GitHub เพื่อดึงงานมาประมวลผลด้วยตนเอง โดยไม่ต้องเปิดพอร์ตให้ GitHub เข้ามาในเครื่องโดยตรง ข้อดีคือช่วยเพิ่มความปลอดภัย ควบคุมสภาพแวดล้อมการทำงานได้ง่าย และเหมาะกับการใช้งานภายในองค์กร
 
 
 </details>
@@ -1199,7 +1205,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ Pull-based ปลอดภัยกว่า Push-based เพราะเครื่อง Runner ไม่รับการเชื่อมต่อจากภายนอกโดยตรง แต่เป็นฝ่ายร้องขอข้อมูลเอง ทำให้ลดความเสี่ยงจากการโจมตีผ่านเครือข่าย และไม่จำเป็นต้องเปิดพอร์ตให้บุคคลภายนอกเข้าถึงระบบ
 
 
 </details>
@@ -1209,7 +1215,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ npm ci ใช้ไฟล์ package-lock.json ในการติดตั้งแพ็กเกจ ทำให้ได้เวอร์ชันที่แน่นอนเหมือนกันทุกครั้ง ลดปัญหาความแตกต่างของ dependencies และทำงานได้รวดเร็วกว่า จึงเหมาะสำหรับการใช้งานในระบบ production
 
 
 </details>
@@ -1219,7 +1225,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ การใช้ Self-Hosted Runner กับ Public Repository มีความเสี่ยงด้านความปลอดภัย เพราะบุคคลภายนอกสามารถแก้ไข Workflow หรือส่งโค้ดที่เป็นอันตรายเข้ามาได้ ซึ่งอาจถูกรันบนเครื่อง Host โดยตรง จึงควรใช้กับ Private Repository เท่านั้น
 
 
 </details>
@@ -1229,7 +1235,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ nginx คือ Web Server และ Reverse Proxy ที่ทำหน้าที่รับคำขอจากผู้ใช้งานและส่งต่อไปยัง Backend การทำ Reverse Proxy ช่วยเพิ่มความปลอดภัย จัดการการเข้าถึงระบบ และแยกหน้าที่ของ Web Server กับแอปพลิเคชันได้อย่างชัดเจน
 
 
 </details>
