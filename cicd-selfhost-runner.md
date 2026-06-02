@@ -964,6 +964,8 @@ tail -f ~/actions-runner/_diag/Runner_*.log
   ```
   บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
   ```
+<img width="1910" height="966" alt="image" src="https://github.com/user-attachments/assets/e425e630-4d10-46ca-9dbd-9aa0bf353b71" />
+
 
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
@@ -1061,6 +1063,8 @@ docker logs nodejs-selfhosted-app
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
+<img width="1919" height="996" alt="image" src="https://github.com/user-attachments/assets/a347955f-2c58-4989-91b5-54368033a40f" />
+
 
 ### ส่วนที่ 8: Monitoring และ Troubleshooting 
 
@@ -1147,6 +1151,9 @@ watch -n 10 ./monitor.sh
 บันทึกรูปผลการรันคำสั่ง
 ```
 
+<img width="1919" height="992" alt="image" src="https://github.com/user-attachments/assets/2430bcea-d36b-4c75-b335-5a933bce41a6" />
+
+
 ## สรุปจุดสำคัญ
 
 ### ✅ ข้อสำคัญสำหรับ Production
@@ -1189,7 +1196,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ Pull-based Model คือรูปแบบที่ Self-Hosted Runner เป็นฝ่ายดึงงานจาก GitHub มาประมวลผลเอง โดย GitHub จะไม่ส่งคำสั่งเข้ามาที่เครื่องโดยตรง ข้อดีคือมีความปลอดภัยสูง ไม่ต้องเปิดพอร์ตให้คนนอกเข้าถึง และผู้ดูแลสามารถควบคุมการทำงานของ Runner ได้ง่ายขึ้น
 
 
 </details>
@@ -1199,7 +1206,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+Pull-based ปลอดภัยกว่า เพราะเครื่อง Runner เป็นฝ่ายติดต่อออกไปยัง GitHub เอง จึงไม่ต้องเปิดให้ระบบภายนอกเข้ามาสั่งงานโดยตรง ลดความเสี่ยงจากการถูกโจมตีหรือสั่งรันคำสั่งที่เป็นอันตราย
 
 
 </details>
@@ -1209,7 +1216,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+เพราะ npm ci จะติดตั้ง dependency ตามไฟล์ package-lock.json อย่างแน่นอน ทำให้ผลลัพธ์เหมือนกันทุกครั้ง ติดตั้งได้รวดเร็ว และลดปัญหาความผิดพลาดที่อาจเกิดขึ้นในระบบ production หรือ CI
 
 
 </details>
@@ -1219,7 +1226,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+เพราะ Public Repository เปิดให้บุคคลภายนอกสามารถส่งโค้ดหรือแก้ไข workflow ได้ ซึ่งอาจแฝงคำสั่งอันตรายเข้ามาและถูกรันบนเครื่อง Self-Hosted Runner ทำให้เสี่ยงต่อความเสียหายและความไม่ปลอดภัยของระบบ
 
 
 </details>
@@ -1229,7 +1236,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ Nginx คือ Web Server ที่ใช้รับและจัดการคำขอจากผู้ใช้งาน การทำ Reverse Proxy ใน Nginx ช่วยซ่อนระบบ Backend เพิ่มความปลอดภัย กระจายโหลด และจัดการการเชื่อมต่อได้อย่างมีประสิทธิภาพ ทำให้ระบบมีความเสถียรและปลอดภัยมากขึ้น
 
 
 </details>
