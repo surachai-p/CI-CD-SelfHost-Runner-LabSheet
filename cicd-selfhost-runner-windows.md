@@ -1073,12 +1073,9 @@ Current runner version: '2.330.0'
 
 ### บันทึกรูปผลการทดลอง
 
-```
-บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
-และแสดง Runner status เป็น "Idle" สีเขียว
-```
+<img width="1885" height="944" alt="image" src="https://github.com/user-attachments/assets/55ed0b96-da23-4624-8d09-5bf63d546d07" />
 
----
+
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
 
@@ -1164,9 +1161,8 @@ docker logs nodejs-selfhosted-app
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
 
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+<img width="960" height="540" alt="Screenshot 2025-12-29 000036" src="https://github.com/user-attachments/assets/d9d2ef46-d9f9-4c69-8b98-cd44d36f9099" />
+
 
 ---
 
@@ -1258,9 +1254,8 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ### บันทึกผลการรัน monitor.ps1
 
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b75539f1-8fb4-475a-a39d-938a05e3b9d4" />
+
 
 ---
 
@@ -1381,7 +1376,8 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+- Runner จะเป็นฝ่าย ดึงงาน (pull) จาก GitHub เอง
+- ข้อดี: ลดความเสี่ยงที่ GitHub จะ push เข้ามาโดยตรง  ปลอดภัยกว่า
 
 </details>
 
@@ -1390,7 +1386,8 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+- เพราะ GitHub ไม่สามารถเข้ามาเชื่อมต่อเครื่องเราเองได้
+- Runner เป็นฝ่ายขอรับงานลดโอกาสโดนโจมตีจากภายนอก
 
 </details>
 
@@ -1399,7 +1396,8 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+- npm ci ใช้ไฟล์ lock (package-lock.json) ติดตั้งตรงตามเวอร์ชัน
+- เร็วกว่าและมั่นใจว่า dependency ไม่เปลี่ยน เสถียรกว่า
 
 </details>
 
@@ -1408,7 +1406,8 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+- Public repo ใครก็เปิด PR ได้ เสี่ยงให้โค้ดอันตรายรันบนเครื่องเรา
+- ป้องกันการโจมตีและการเข้าถึงระบบภายใน
 
 </details>
 
@@ -1417,7 +1416,8 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+- Nginx คือ web server ที่เร็วและเบา
+- Reverse Proxy: ซ่อน backend, กระจายโหลด, เพิ่มความปลอดภัย และทำ SSL termination
 
 </details>
 
@@ -1426,7 +1426,8 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+- Windows: ใช้ PowerShell/Batch, บาง dependency ทำงานช้ากว่า
+- Linux: ใช้ Bash, เสถียรและนิยมมากกว่าในการ deploy production
 
 </details>
 
