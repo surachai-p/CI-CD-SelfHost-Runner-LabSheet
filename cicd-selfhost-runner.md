@@ -961,6 +961,9 @@ tail -f ~/actions-runner/_diag/Runner_*.log
 2. ควรเห็น runner แสดงสถานะ **Idle** สีเขียว
 
   ### บันทึกรูปผลการทดลอง
+
+
+
   ```
   บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
   ```
@@ -1058,6 +1061,8 @@ docker logs nodejs-selfhosted-app
 ```
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
+
+
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
@@ -1143,6 +1148,8 @@ chmod +x monitor.sh
 watch -n 10 ./monitor.sh
 ```
 ### บันทึกผลการรัน monitor.sh
+
+
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
@@ -1191,7 +1198,6 @@ watch -n 10 ./monitor.sh
 
  เขียนคำตอบลงในช่องนี้
 
-
 </details>
 
 ### 2. ทำไม Pull-based ปลอดภัยกว่า Push-based
@@ -1230,8 +1236,7 @@ watch -n 10 ./monitor.sh
 <summary>คำตอบ</summary>
 
  เขียนคำตอบลงในช่องนี้
-
-
+ 
 </details>
 ---
 

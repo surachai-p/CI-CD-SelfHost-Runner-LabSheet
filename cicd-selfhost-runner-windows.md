@@ -1072,7 +1072,7 @@ Current runner version: '2.330.0'
 3. Label ควรมี: `self-hosted`, `Windows`, `X64`
 
 ### บันทึกรูปผลการทดลอง
-
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/2ca3132f-c320-4e99-ac1a-5b1427a68ac0" />
 ```
 บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
 และแสดง Runner status เป็น "Idle" สีเขียว
@@ -1163,6 +1163,7 @@ docker logs nodejs-selfhosted-app
 ```
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
+<img width="1004" height="195" alt="image" src="https://github.com/user-attachments/assets/29e92bd9-788c-45f5-973a-3a814d2f8815" />
 
 ```txt
 บันทึกรูปผลการรันคำสั่ง
@@ -1257,7 +1258,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 ### บันทึกผลการรัน monitor.ps1
-
+<img width="1125" height="633" alt="image" src="https://github.com/user-attachments/assets/1ec08a1d-70e4-43b5-8984-b34f9f9d8937" />
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
@@ -1381,8 +1382,13 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
-
+ เขียนคำตอบลงในช่องนี้
+Pull-based Model คือรูปแบบการทำงานของ GitHub Self-Hosted Runner ที่ตัว Runner จะเป็นฝ่าย เชื่อมต่อออกไป (Outbound Connection) เพื่อดึงงาน (Job) จาก GitHub เอง แทนที่ GitHub จะส่งงานเข้ามาหา Runner โดยตรง
+ข้อดี:
+ไม่ต้องเปิดพอร์ตจากภายนอกเข้ามาในเครื่อง Runner
+ลดความเสี่ยงด้านความปลอดภัยจากการโจมตีแบบ Inbound
+Runner ทำงานได้หลัง Firewall หรือ NAT
+ควบคุมการเริ่ม–หยุดการทำงานของ Runner ได้จากฝั่งเครื่องตนเอง
 </details>
 
 ### 2. ทำไม Pull-based ปลอดภัยกว่า Push-based
@@ -1390,7 +1396,12 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+ เขียนคำตอบลงในช่องนี้
+Pull-based ปลอดภัยกว่า Push-based เพราะ Runner เป็นฝ่ายร้องขอ Job จาก GitHub เอง ทำให้:
+ไม่มีการเปิดพอร์ตหรือรับคำสั่งจากภายนอกโดยตรง
+ลดโอกาสถูกโจมตีจากบุคคลที่ไม่พึงประสงค์
+GitHub ไม่สามารถรันโค้ดบนเครื่อง Runner ได้ เว้นแต่ Runner จะยอมดึงงานมาเอง
+เหมาะกับระบบที่อยู่หลัง Firewall และระบบภายในองค์กร
 
 </details>
 
@@ -1399,7 +1410,12 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+ เขียนคำตอบลงในช่องนี้
+npm ci ถูกออกแบบมาเพื่อใช้ในสภาพแวดล้อม Production และ CI/CD โดยเฉพาะ เพราะ:
+ติดตั้ง dependencies ตาม package-lock.json แบบ 100% ทำให้ผลลัพธ์คงที่
+เร็วกว่า npm install เพราะไม่คำนวณ dependency ใหม่
+ลบ node_modules เดิมก่อนติดตั้ง ลดปัญหาความไม่สอดคล้อง
+ป้องกันการเปลี่ยนเวอร์ชัน dependency โดยไม่ตั้งใจ
 
 </details>
 
@@ -1408,16 +1424,28 @@ taskkill /PID <PID> /F
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+ เขียนคำตอบลงในช่องนี้
+ห้ามใช้ Self-Hosted Runner กับ Public Repository เพราะ:
+ใครก็สามารถส่ง Pull Request เข้ามาได้
+โค้ดอันตรายอาจถูกรันบนเครื่อง Runner โดยตรง
+เสี่ยงต่อการถูกขโมย Secret, Token และข้อมูลภายในระบบ
+อาจถูกใช้เป็นช่องทางโจมตีระบบภายในองค์กร
+ดังนั้น Self-Hosted Runner ควรใช้กับ Private Repository เท่านั้น
 
 </details>
 
-### 5. Nginx คืออะไร และการทำ Reverse Proxy ใน Nginx มีความสำคัญอย่างไร
 
+### 5. Nginx คืออะไร และการทำ Revers Proxy ใน Nginx มีความสำคัญอย่างไร
 <details>
 <summary>คำตอบ</summary>
 
-เขียนคำตอบลงในช่องนี้
+ เขียนคำตอบลงในช่องนี้
+Nginx คือ Web Server และ Reverse Proxy ที่มีประสิทธิภาพสูง ใช้จัดการการรับ–ส่ง HTTP/HTTPS ระหว่างผู้ใช้และ Backend Server
+ความสำคัญของ Reverse Proxy:
+ซ่อนโครงสร้าง Backend เพิ่มความปลอดภัย
+ทำ Load Balancing กระจายโหลดไปหลายเซิร์ฟเวอร์
+จัดการ HTTPS/SSL ได้จากจุดเดียว
+เพิ่มประสิทธิภาพและความเสถียรของระบบ
 
 </details>
 
@@ -1427,7 +1455,9 @@ taskkill /PID <PID> /F
 <summary>คำตอบ</summary>
 
 เขียนคำตอบลงในช่องนี้
-
+ความแตกต่างระหว่าง Runner บน Windows และ Linux
+Windows ใช้ PowerShell / cmd, ทำงานช้ากว่า ใช้ทรัพยากรมาก เหมาะกับงานที่ต้องพึ่ง Windows โดยเฉพาะ
+Linux ใช้ bash, เร็วกว่า เสถียรกว่า ใช้ทรัพยากรน้อย เหมาะกับงาน CI/CD และ DevOps
 </details>
 
 ---
