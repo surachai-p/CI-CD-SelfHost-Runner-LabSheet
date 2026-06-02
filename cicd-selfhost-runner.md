@@ -1,4 +1,4 @@
- # ใบงาน: การ Deploy แอปพลิเคชันด้วย GitHub Actions และ Self-Hosted Runner
+# ใบงาน: การ Deploy แอปพลิเคชันด้วย GitHub Actions และ Self-Hosted Runner
 ## วัตถุประสงค์
 
 1. อธิบายหลักการทำงานของ Self-Hosted Runner แบบ Pull-based Model ได้
@@ -961,9 +961,10 @@ tail -f ~/actions-runner/_diag/Runner_*.log
 2. ควรเห็น runner แสดงสถานะ **Idle** สีเขียว
 
   ### บันทึกรูปผลการทดลอง
-  ```
-  บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
-  ```
+  
+  <img width="1470" height="956" alt="ภาพถ่ายหน้าจอ 2568-12-23 เวลา 13 39 31" src="https://github.com/user-attachments/assets/75b6bba1-e819-4020-ba99-a720d82983fb" />
+
+  
 
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
@@ -1058,9 +1059,15 @@ docker logs nodejs-selfhosted-app
 ```
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+<img width="1470" height="956" alt="ภาพถ่ายหน้าจอ 2568-12-23 เวลา 13 39 43" src="https://github.com/user-attachments/assets/6e082a55-d742-4331-a973-7cc72981b62b" />
+
+
+
+
+<img width="1470" height="956" alt="ภาพถ่ายหน้าจอ 2568-12-23 เวลา 14 16 10" src="https://github.com/user-attachments/assets/065d14da-9325-45aa-acca-8b5aebe37fb4" />
+
+
+
 
 ### ส่วนที่ 8: Monitoring และ Troubleshooting 
 
@@ -1143,9 +1150,10 @@ chmod +x monitor.sh
 watch -n 10 ./monitor.sh
 ```
 ### บันทึกผลการรัน monitor.sh
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+
+<img width="1470" height="956" alt="ภาพถ่ายหน้าจอ 2568-12-23 เวลา 14 14 19" src="https://github.com/user-attachments/assets/6cde6937-fe26-4d20-badc-f296e1e49360" />
+
+
 
 ## สรุปจุดสำคัญ
 
@@ -1189,7 +1197,8 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ เครื่องเราสามารถทักไปหา GitHub เองเพื่อขอรับงาน 
+ ข้อดี: ไม่ต้องเปิดพอร์ตขาเข้า (Firewall) ให้คนนอกบุกรุก
 
 
 </details>
@@ -1199,7 +1208,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ ปลอดภัยกว่า Push-based เพราะไม่ต้องแชร์ SSH Key ไว้บน Cloud และไม่มีพอร์ตเปิดทิ้งไว้ให้โดนสแกน
 
 
 </details>
@@ -1209,7 +1218,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ เพราะติดตั้ง Library ได้เวอร์ชัน "ตรงเป๊ะ" ตามที่เทสไว้ และทำงานเร็วกว่า npm install
 
 
 </details>
@@ -1219,7 +1228,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ เพราะคนแปลกหน้าสามารถส่ง Code อันตรายมาสั่งรันเพื่อ "ยึดเครื่อง" หรือขโมยข้อมูลเราได้
 
 
 </details>
@@ -1229,7 +1238,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ Nginx เป็น "ด่านหน้า" รับแขกแทนแอป ช่วยซ่อนพอร์ตจริง, จัดการ HTTPS (SSL), และช่วยกระจายโหลดงาน (Load Balance)
 
 
 </details>
