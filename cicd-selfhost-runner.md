@@ -961,9 +961,8 @@ tail -f ~/actions-runner/_diag/Runner_*.log
 2. ควรเห็น runner แสดงสถานะ **Idle** สีเขียว
 
   ### บันทึกรูปผลการทดลอง
-  ```
-  บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
-  ```
+<img width="1919" height="557" alt="image" src="https://github.com/user-attachments/assets/d2a7670b-649f-444e-b157-430ec8bd5d35" />
+
 
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
@@ -1058,9 +1057,9 @@ docker logs nodejs-selfhosted-app
 ```
 
 ### บันทึกผลการรันคำสั่ง docker logs nodejs-selfhosted-app
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+
+<img width="655" height="90" alt="Screenshot 2025-12-23 104016" src="https://github.com/user-attachments/assets/0bd59143-1ad8-44f5-9748-a97e89a5e1dd" />
+
 
 ### ส่วนที่ 8: Monitoring และ Troubleshooting 
 
@@ -1143,9 +1142,9 @@ chmod +x monitor.sh
 watch -n 10 ./monitor.sh
 ```
 ### บันทึกผลการรัน monitor.sh
-```txt
-บันทึกรูปผลการรันคำสั่ง
-```
+
+<img width="552" height="455" alt="image" src="https://github.com/user-attachments/assets/c56a5f6b-5576-4642-b1db-710880e43220" />
+
 
 ## สรุปจุดสำคัญ
 
@@ -1189,7 +1188,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ Pull-based Model คือการที่ตัว Runner เป็นฝ่ายส่งสัญญาณออกไปหา GitHub Server เพื่อของานมาทำ แทนที่จะรอให้ Server ส่งงานมาให้ ข้อดีคือความปลอดภัย เพราะไม่ต้องเปิด Port ขาเข้า บน Firewall ทำให้ลดความเสี่ยงจากการถูกเจาะระบบจากภายนอก
 
 
 </details>
@@ -1199,7 +1198,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ เพราะการเชื่อมต่อแบบ Pull-based เป็นการส่งข้อมูลออกเพียงอย่างเดียวจากภายใน Network ของเราเอง ต่างจาก Push-based ที่ต้องเปิดหน้าด่านให้โลกภายนอกติดต่อเข้ามาได้ ซึ่งเป็นช่องทางที่แฮกเกอร์อาจใช้โจมตีหรือสแกนหาช่องโหว่ของระบบได้ง่ายกว่า
 
 
 </details>
@@ -1209,7 +1208,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ npm ci ถูกออกแบบมาเพื่อความแม่นยำในระดับ Production โดยจะติดตั้ง Library ตามเวอร์ชันที่ระบุไว้ในไฟล์ package-lock.json แบบเป๊ะๆ และจะลบโฟลเดอร์ node_modules เดิมทิ้งก่อนลงใหม่เสมอ เพื่อป้องกันปัญหา "เครื่องรันได้แต่ที่เซิร์ฟเวอร์รันไม่ได้" ซึ่งมักเกิดจากเวอร์ชันของ Library ที่คลาดเคลื่อน
 
 
 </details>
@@ -1219,7 +1218,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ การใช้ Self-hosted Runner กับ Public Repository มีความเสี่ยงสูงเพราะบุคคลภายนอกสามารถส่ง Pull Request ที่แฝงโค้ดอันตรายมารันในเครื่องเราได้ ซึ่งอาจทำให้ข้อมูลสำคัญรั่วไหลหรือถูกควบคุมระบบเครือข่ายภายในจากระยะไกล
 
 
 </details>
@@ -1229,7 +1228,7 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
+ nginx คือซอฟต์แวร์ Web Server ที่มีความเร็วสูง การทำ Reverse Proxy คือการวาง nginx ไว้หน้า App หลักเพื่อทำหน้าที่รับ Request แทน ซึ่งมีความสำคัญในการช่วยซ่อนโครงสร้างจริงของแอปไว้เบื้องหลัง เพิ่มความปลอดภัยในการจัดการ SSL/HTTPS และยังช่วยกระจายโหลดงาน (Load Balancing) ให้ระบบรองรับคนใช้งานได้เสถียรขึ้น
 
 
 </details>
