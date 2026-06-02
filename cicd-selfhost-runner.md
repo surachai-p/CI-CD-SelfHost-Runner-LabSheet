@@ -961,9 +961,8 @@ tail -f ~/actions-runner/_diag/Runner_*.log
 2. ควรเห็น runner แสดงสถานะ **Idle** สีเขียว
 
   ### บันทึกรูปผลการทดลอง
-  ```
-  บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
-  ```
+  
+<img width="1470" height="885" alt="ภาพถ่ายหน้าจอ 2568-12-27 เวลา 12 24 06" src="https://github.com/user-attachments/assets/1105ef00-6f7c-4e8b-a1eb-ae74a3645fb2" />
 
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
@@ -1190,7 +1189,7 @@ watch -n 10 ./monitor.sh
 <summary>คำตอบ</summary>
 
  เขียนคำตอบลงในช่องนี้
-
+Runner เป็นฝ่ายดึงงานจาก GitHub เอง ทำให้ไม่ต้องเปิดพอร์ตและปลอดภัยกว่า
 
 </details>
 
@@ -1200,7 +1199,7 @@ watch -n 10 ./monitor.sh
 <summary>คำตอบ</summary>
 
  เขียนคำตอบลงในช่องนี้
-
+GitHub ไม่สามารถส่งคำสั่งเข้ามาที่เครื่องโดยตรง ลดความเสี่ยงถูกโจมตี
 
 </details>
 
@@ -1210,7 +1209,7 @@ watch -n 10 ./monitor.sh
 <summary>คำตอบ</summary>
 
  เขียนคำตอบลงในช่องนี้
-
+ติดตั้ง dependency ได้ตรงตาม package-lock.json เร็วและเสถียรกว่า
 
 </details>
 
@@ -1220,7 +1219,7 @@ watch -n 10 ./monitor.sh
 <summary>คำตอบ</summary>
 
  เขียนคำตอบลงในช่องนี้
-
+คนอื่นสามารถส่งโค้ดอันตรายมารันบนเครื่อง Runner ได้
 
 </details>
 
@@ -1230,7 +1229,7 @@ watch -n 10 ./monitor.sh
 <summary>คำตอบ</summary>
 
  เขียนคำตอบลงในช่องนี้
-
+nginx เป็นเว็บเซิร์ฟเวอร์ที่ทำหน้าที่เป็นด่านหน้า ช่วยเพิ่มความปลอดภัยและประสิทธิภาพ
 
 </details>
 ---
