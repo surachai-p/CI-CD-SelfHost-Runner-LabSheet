@@ -964,6 +964,8 @@ tail -f ~/actions-runner/_diag/Runner_*.log
   ```
   บันทึกรูปหน้า Runners โดยคัดลอกให้เห็น Account ของ GitHub และ Repository
   ```
+<img width="1440" height="900" alt="ภาพถ่ายหน้าจอ 2568-12-23 เวลา 10 31 13" src="https://github.com/user-attachments/assets/a7f8d332-ef8b-4133-9e21-0c53520ba7a0" />
+
 
 
 ### ส่วนที่ 7: ทดสอบ CI/CD Pipeline
@@ -1061,6 +1063,8 @@ docker logs nodejs-selfhosted-app
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
+<img width="1440" height="900" alt="ภาพถ่ายหน้าจอ 2568-12-23 เวลา 10 44 34" src="https://github.com/user-attachments/assets/be68b8f9-52d0-4ded-8c29-c26a4bb2e612" />
+
 
 ### ส่วนที่ 8: Monitoring และ Troubleshooting 
 
@@ -1146,6 +1150,8 @@ watch -n 10 ./monitor.sh
 ```txt
 บันทึกรูปผลการรันคำสั่ง
 ```
+<img width="1440" height="900" alt="ภาพถ่ายหน้าจอ 2568-12-23 เวลา 10 47 30" src="https://github.com/user-attachments/assets/a5037135-f80a-4c48-b930-faceb6fe80ae" />
+
 
 ## สรุปจุดสำคัญ
 
@@ -1189,8 +1195,8 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
-
+Pull-based คือ runner เป็นฝ่ายไปขอรับงานจาก GitHub เอง
+ข้อดีคือเครื่องเราไม่ต้องเปิดให้ GitHub เข้ามาสั่งงานตรง ๆ ทำให้ปลอดภัยขึ้น และเราควบคุมเครื่องเราได้เอง
 
 </details>
 
@@ -1199,8 +1205,8 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
-
+เพราะ GitHub ไม่ได้เข้ามาในเครื่องเราโดยตรง
+เครื่องเราเป็นฝ่ายออกไปติดต่อเอง เลยลดโอกาสโดนคนอื่นเข้ามาโจมตีหรือสั่งรันคำสั่งแปลก ๆ
 
 </details>
 
@@ -1209,8 +1215,8 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
-
+เพราะ npm ci ติดตั้งแพ็กเกจตามไฟล์ที่ล็อกไว้แน่นอน
+ทำให้รันได้เหมือนกันทุกครั้ง ไม่มั่ว และเหมาะกับการใช้บน server มากกว่า
 
 </details>
 
@@ -1219,8 +1225,8 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
-
+เพราะใครก็ส่งโค้ดเข้ามาได้
+ถ้าใช้ self-hosted runner โค้ดของคนอื่นอาจถูกรันบนเครื่องเรา ทำให้เครื่องไม่ปลอดภัย
 
 </details>
 
@@ -1229,8 +1235,8 @@ watch -n 10 ./monitor.sh
 <details>
 <summary>คำตอบ</summary>
 
- เขียนคำตอบลงในช่องนี้
-
+nginx คือโปรแกรมที่ช่วยรับเว็บให้เรา
+Reverse Proxy ช่วยรับคำขอจากผู้ใช้แทน server จริง ทำให้ระบบปลอดภัยขึ้น และจัดการเว็บได้ง่ายกว่า
 
 </details>
 ---
